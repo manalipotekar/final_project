@@ -132,6 +132,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     email: _emailTextController.text,
                                     password: _passwordTextController.text)
                                 .then((value) {
+                                  
+                                  
                               print("signin success");
                               Navigator.push(
                                   context,
@@ -140,6 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             }).onError((error, stackTrace) {
                               print("Error ${error.toString()}");
                             });
+                            
                           }),
                           signUpOption()
                         ],
