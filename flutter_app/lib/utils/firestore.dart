@@ -63,7 +63,7 @@ class FirestoreUtil {
   static addToCart(User? user, String productId) async {
     
     if (user == null) {
-     
+     print("user is null");
       return;
     }
     try {

@@ -13,7 +13,7 @@ class MyCommunityScreen extends StatefulWidget {
 
 
 class _MyCommunityScreenState extends State<MyCommunityScreen> {
-  final AddProductScreen controller= Get.find();
+  // final AddProductScreen controller= Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_app/pages/list_by_category.dart';
 import 'package:flutter_app/pages/profile.dart';
 import 'package:flutter_app/pages/profile1.dart';
+import 'package:flutter_app/screens/fertilizer_screen.dart';
+import 'package:flutter_app/screens/my_community.dart';
 
 import 'checkout.dart';
 import 'home.dart';
@@ -44,7 +47,7 @@ class _frontPageState extends State<frontPage> {
                 Tab(icon: Icon(Icons.person)),
               ])),
           body: TabBarView(
-          children: [frontpage1(), ProfileScreen(), CheckoutScreen(),MyAccount()]),
+          children: [frontpage1(), HomeScreen(), CheckoutScreen(),ProfileScreen()]),
 
 
 
@@ -169,7 +172,20 @@ class frontpage1 extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Expanded(child: Image.asset( "assets/pineaple.jpeg")),
+                                    Container(child: Expanded(
+                                      
+                                      
+                                      child: InkWell(child: Image.asset( "assets/pineaple.jpeg"),
+                                      
+                                      onTap: (){
+                                        Navigator.push(context,MaterialPageRoute(builder: (context)=>ListItemsByCategory())
+                                        );
+                                      },
+                                      
+                                      
+                                      ),
+                                      
+                                      )),
                                     Text("Fruits")
                                   ],
                                 ),

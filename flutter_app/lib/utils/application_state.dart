@@ -21,6 +21,8 @@ class ApplicationState extends ChangeNotifier {
   Future init() async {
     FirebaseAuth.instance.userChanges().listen((useFir) {
       if (useFir != null) {
+        // print(useFir);
+        user=useFir;
         print("manali");
         loginState = AplicationLoginState.loggedIn;
         notifyListeners();
@@ -54,9 +56,10 @@ class ApplicationState extends ChangeNotifier {
       try {
         log("inside signup");
         //  log(userCredential.user!.uid);
-         
+      
         await CommonUtil.backendCall(
             userCredential.user!, CommonUtil.stripeUserCreate);
+          notifyListeners();
        
       } catch (e) {
         log("error1"+ e.toString());

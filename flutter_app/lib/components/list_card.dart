@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_app/models/cart.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
 
 class ListCard extends StatelessWidget {
-  const ListCard({super.key});
+  final Cart cart;
+  const ListCard({required this.cart,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +24,8 @@ class ListCard extends StatelessWidget {
                   flex: 4,
                   child: SizedBox(
                     height: double.infinity,
-                    child: Image.asset(
-                      'assets/pink1.jpg',
-                      fit: BoxFit.cover,
+                    child: CachedNetworkImage(imageUrl: cart.image,
+                    fit:BoxFit.contain,
                     ),
                   )),
               Expanded(
@@ -37,21 +39,21 @@ class ListCard extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(
-                            "title",
+                            cart.title,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
                          Padding(
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(
-                            "Qty 1",
+                            "Qty: "+cart.count.toString(),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                          Padding(
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(
-                            "\$price",
+                            "\$"+cart.price.toString(),
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),

@@ -37,19 +37,23 @@ class _HomeScreenState extends State<HomeScreen> {
         future: products,
         builder: (context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            return GridView.builder(
+            return ListView.builder(
+              
                 itemCount: snapshot.data?.length,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,mainAxisSpacing: 30,crossAxisSpacing: 30),
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                // listDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 1,mainAxisSpacing: 0,crossAxisSpacing: 0),
                 itemBuilder: (BuildContext context, int index) {
                   return GridCard(
+
                     product:snapshot.data![index],
                       index: index,
                       onPress: () {
                         onCardPress(snapshot.data![index]);
                       });
-                });
+                }
+                
+                );
           }
           else{
             return Center(child: loader());

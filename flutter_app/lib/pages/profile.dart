@@ -40,7 +40,8 @@ void signOutButtonPressed(){
               return ListView.builder(
                 
                 shrinkWrap: true,
-                itemCount: snapshot.data!.docs.length,itemBuilder: ((context,int index) {
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: ((context,int index) {
                 return Container(child: Text(snapshot.data!.docs[index]['title']));
               }));
             })),

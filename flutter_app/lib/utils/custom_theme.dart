@@ -7,8 +7,9 @@ class CustomTheme{
   static getCardDecoration(){
 return BoxDecoration(
       color:Colors.white,
-      borderRadius: BorderRadius.circular(35),
-      boxShadow: cardShadow
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: cardShadow,
+      // border: Border.all()
 );
   }
   

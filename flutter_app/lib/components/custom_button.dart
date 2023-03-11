@@ -17,7 +17,7 @@ const CustomButton({Key?key, required this.text,this.loading=false,required this
       height: 54,
       width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(35), color: Colors.yellow),
+          borderRadius: BorderRadius.circular(35), color: Colors.green[600]),
       child: MaterialButton(
           onPressed: loading ? null : onPress,
           child: loading ?const loader() : Text(text)),
