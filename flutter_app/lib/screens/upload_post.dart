@@ -49,7 +49,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                           final results=await FilePicker.platform.pickFiles(
                             allowMultiple: false,
                             type:FileType.custom,
-                            allowedExtensions: ['png','jpg']
+                           
                           );
                           if(results==null){
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -57,14 +57,8 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                               ) 
                               );
                               return null;
-                          }
-                          final filePath=results.files.single.path;
-                          final fileName=results.files.single.name;
-                          print(filePath);
-                          print(fileName);
-
-                          storage.uploadFile(filePath, fileName).then((value)=>print('Done')) ;
-
+                          }          
+                          
                         },
                       
                       child: Text("Upload image"))
