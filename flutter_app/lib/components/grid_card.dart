@@ -24,32 +24,58 @@ class GridCard extends StatelessWidget {
       margin: index % 2 == 0 ? EdgeInsets.all(5) : EdgeInsets.all(5),
       decoration: CustomTheme.getCardDecoration(),
       child: Container(
-         decoration:
-                  BoxDecoration(
-                    // border: Border.all(),
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-        // elevation: 5,
-// borderOnForeground: true,
-
+        decoration: BoxDecoration(
+          
+            // border: Border.all(),
+            borderRadius: BorderRadius.all(Radius.circular(25))),
+   
         child: GestureDetector(
           onTap: onPress,
           child: Container(
-             
-              decoration:
-                  BoxDecoration(
-                    // border: Border.all(),
-                    borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(           
+
+                  // border: Border.all(),
+                  borderRadius: BorderRadius.circular(20)),
               child: Column(children: [
                 Container(
-                  decoration: BoxDecoration(color: Color.fromARGB(255, 206, 224, 255),),
-                    height: 180,
+                  padding: EdgeInsets.only(top: 10,right: 10,left:10),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [
+                            // Colors.white,
+                            Color.fromARGB(255, 225, 254, 226),
+                            Color.fromARGB(255, 252, 242, 198),
+                            
+
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter),
+                      color: Color.fromARGB(255, 206, 224, 255),
+                    ),
+                    height: 160,
                     // flex: 3,
                     child: SizedBox(
+                      
                         width: double.infinity,
                         child: CachedNetworkImage(
                           imageUrl: product.image,
-                        ))),
+                          fit: BoxFit.cover,
+                        )
+                        // child: Image.asset("assets/f5.jpeg",
+                        //  fit: BoxFit.cover,
+                        // ),
+                        )
+                        ),
                 Container(
+                  decoration: BoxDecoration(
+                    //  gradient: LinearGradient(
+                    //       colors: [
+                    //         Color.fromARGB(255, 177, 236, 179),
+                    //         Colors.white,
+                    //       ],
+                    //       begin: Alignment.topCenter,
+                    //       end: Alignment.bottomCenter),
+                  ),
                     // flex: 2,
                     height: 70,
                     // decoration: BoxDecoration(border: Border.all()),
@@ -62,6 +88,7 @@ class GridCard extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 4),
                             child: Text(
                               product.title,
+                             
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 20),
                             ),

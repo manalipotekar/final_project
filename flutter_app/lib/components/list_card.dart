@@ -27,6 +27,7 @@ class ListCard extends StatelessWidget {
                     child: CachedNetworkImage(imageUrl: cart.image,
                     fit:BoxFit.contain,
                     ),
+                     
                   )),
               Expanded(
                   flex: 6,
@@ -40,6 +41,7 @@ class ListCard extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(
                             cart.title,
+                            
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
@@ -53,7 +55,7 @@ class ListCard extends StatelessWidget {
                          Padding(
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(
-                            "\$"+cart.price.toString(),
+                            "Rs "+cart.price.toString(),
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),

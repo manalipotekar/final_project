@@ -29,7 +29,7 @@ void main() async {
         switch (applicationState.loginState) {
           case AplicationLoginState.loggedOut:
             print(AplicationLoginState.loggedOut);
-            child = LoginScreen();
+            child = SignInScreen();
             break;
           case AplicationLoginState.loggedIn:
             print(AplicationLoginState.loggedIn);
@@ -38,12 +38,15 @@ void main() async {
             break;
           default:
             // print(AplicationLoginState.loggedIn);
-            child = LoginScreen();
+            child = SignInScreen();
         }
 
         print(child);
 
-        return MaterialApp(theme: CustomTheme.getTheme(), home: child);
+        return MaterialApp(theme: CustomTheme.getTheme(), home: child,
+        
+      debugShowCheckedModeBanner: false,
+        );
       },
       child: const MyApp(),
     ),
@@ -59,6 +62,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     //build is container (stateless widget)
     return
         //  MaterialApp(

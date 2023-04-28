@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_app/pages/frontpage.dart';
 import 'package:flutter_app/screens/crop_screen.dart';
 import 'package:flutter_app/screens/fertilizer_screen.dart';
 import 'package:flutter_app/screens/home.dart';
@@ -108,7 +109,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               validator: MultiValidator([
                                 EmailValidator(errorText: "Not valid"),
                                 RequiredValidator(errorText: "Required"),
-                              ])),
+                              ])
+                              ),
                               const SizedBox(
                             height: 15,
                           ),
@@ -120,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             decoration: inputDec("Password", Icons.key),
                             validator: MultiValidator([
                               RequiredValidator(errorText: "Required"),
-                              MinLengthValidator(6, errorText: "min 6")
+                              MinLengthValidator(7, errorText: "min 7")
                             ]),
                           ),
                             SizedBox(
@@ -138,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomeScreen()));
+                                      builder: (context) => frontPage()));
                             }).onError((error, stackTrace) {
                               print("Error ${error.toString()}");
                             });

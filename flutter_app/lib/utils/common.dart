@@ -8,9 +8,11 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 
+
+
 class CommonUtil{
 
-  static const String apiUrl='http://127.0.0.1:64518';
+  static const String apiUrl='http://192.168.52.217:4242';
   static const String stripeUserCreate="/add/user";
   static const String checkout="/checkout";
 
@@ -18,10 +20,10 @@ class CommonUtil{
 
 
   static backendCall(User user,String endPoint) async{
-    print(user);
+    // print(user);
     
     String token=await user.getIdToken();
-    print("Token "+token);
+    // print("Token "+token);
     try{
       return http.post(Uri.parse(apiUrl+ endPoint),headers: {
       "Accept":"application/json",

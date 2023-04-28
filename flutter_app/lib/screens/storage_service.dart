@@ -89,6 +89,11 @@ Row(
 
         ),
         ElevatedButton.icon(
+           style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Colors.white),
+                        foregroundColor: MaterialStatePropertyAll<Color>(Colors.green)
+                            ),
           onPressed: (){
             pickImage(ImageSource.gallery);
             // imagePickerOption();

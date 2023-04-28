@@ -37,23 +37,53 @@ class _HomeScreenState extends State<HomeScreen> {
         future: products,
         builder: (context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            return ListView.builder(
+            return Scaffold(
               
-                itemCount: snapshot.data?.length,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                // listDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 1,mainAxisSpacing: 0,crossAxisSpacing: 0),
-                itemBuilder: (BuildContext context, int index) {
-                  return GridCard(
+              body: Container(
 
-                    product:snapshot.data![index],
-                      index: index,
-                      onPress: () {
-                        onCardPress(snapshot.data![index]);
-                      });
-                }
-                
-                );
+                child: Column(
+                  children: [
+                    Container(
+                      margin:EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: Color.fromARGB(255, 230, 230, 230),
+                      // border: Border.all()
+                      ),
+                      child: TextFormField(
+                        // cursorHeight: 0,cursorWidth: 0,
+
+                        enableInteractiveSelection: true,
+            decoration: const InputDecoration(
+              icon: Icon(Icons.search,color: Color.fromARGB(255, 143, 143, 143),),fillColor: Colors.grey,
+              border: InputBorder.none,
+              
+              hintText: 'Search',
+              
+            ),),),
+
+                    Expanded(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data?.length,
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          
+                          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          //     crossAxisCount: 2,mainAxisSpacing: 0,crossAxisSpacing: 0),
+                          itemBuilder: (BuildContext context, int index) {
+                            return GridCard(
+                              product:snapshot.data![index],
+                                index: index,
+                                onPress: () {
+                                  onCardPress(snapshot.data![index]);
+                                });
+                          }
+                          
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           }
           else{
             return Center(child: loader());

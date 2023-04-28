@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/frontpage.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -54,7 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       enabledBorder: OutlineInputBorder(  //not focused border
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(
-              width: 3, color: Color.fromARGB(118, 5, 88, 48))),
+              width: 3, color: Color.fromARGB(118, 5, 88, 48))
+              
+              ),
       focusedBorder: new OutlineInputBorder(  //displayed when InputDecorator.isFocused is true and
         borderRadius: new BorderRadius.circular(30.0),
         borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
@@ -80,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "Register",
+          "",
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -174,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(   //To switch to new screen
                             context,
                             MaterialPageRoute(  //route to next page
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => frontPage()));
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");  //if error the display on debug console
                       });

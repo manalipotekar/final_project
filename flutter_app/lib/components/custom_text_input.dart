@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../utils/custom_theme.dart';
 
@@ -22,35 +23,46 @@ class CustomTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(),
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
+            
             padding: EdgeInsets.only(left: 20, bottom: 8),
             child:
-                Text(label, style: Theme.of(context).textTheme.headlineSmall),
+                Text(label, style: TextStyle( color:CustomTheme.green)),
+
           ),
           SizedBox(
             height: 54,
-            child: TextField(
+            child: TextFormField(
               controller: textEditingController,
+              validator: MultiValidator([
+                                EmailValidator(errorText: "Not valid"),
+                                RequiredValidator(errorText: "Required"),
+                              ]),
               obscureText: password,
               enableSuggestions: !password,
               autocorrect: !password,
               decoration: InputDecoration(
                 prefixIcon: Padding(
                   padding: const EdgeInsetsDirectional.only(start: 22, end: 22),
-                  child: Icon(icon, color: Colors.black, size: 24),
+                  child: Icon(icon, color:CustomTheme.green, size: 24),
                 ),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(35)),
-                  borderSide: BorderSide(width: 1, color: Colors.black),
-                ),
+                focusedBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                    borderSide: BorderSide(
+                        width: 2, color: Color.fromARGB(118, 5, 88, 48))),
+                enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                    borderSide: BorderSide(
+                        width: 2, color: Color.fromARGB(118, 5, 88, 48))),
                 filled: true,
                 hintStyle: TextStyle(color: CustomTheme.grey),
                 hintText: placeholder,
-                fillColor: Colors.white,
+                fillColor: Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
               ),
             ),
           )

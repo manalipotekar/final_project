@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/loader.dart';
+import 'package:flutter_app/utils/custom_theme.dart';
 
 
 class CustomButton extends StatelessWidget {
@@ -17,10 +18,10 @@ const CustomButton({Key?key, required this.text,this.loading=false,required this
       height: 54,
       width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(35), color: Colors.green[600]),
+          borderRadius: BorderRadius.circular(35), color:CustomTheme.green),
       child: MaterialButton(
           onPressed: loading ? null : onPress,
-          child: loading ?const loader() : Text(text)),
+          child: loading ?const loader() : Text(text,style: TextStyle(color: Colors.white),)),
     );
   }
 }

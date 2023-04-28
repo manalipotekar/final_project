@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/custom_button.dart';
 import 'package:flutter_app/models/product.dart';
+import 'package:flutter_app/pages/checkout.dart';
 import 'package:flutter_app/utils/application_state.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
 import 'package:flutter/src/widgets/text.dart';
@@ -30,7 +32,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print( Provider.of<ApplicationState>(context, listen: false).user);
+    // print( Provider.of<ApplicationState>(context, listen: false).user);
     
 
   void onAddToCart() async {
@@ -49,10 +51,9 @@ class _ProductScreenState extends State<ProductScreen> {
     print("//");
     await FirestoreUtil.addToCart(
         Provider.of<ApplicationState>(context, listen: false).user,
-        
         widget.product.id);
 
-    print( ApplicationState().user );
+    // print( ApplicationState().user );
 
     setState(() {
       addButtonLoad = false;
@@ -77,22 +78,39 @@ class _ProductScreenState extends State<ProductScreen> {
                         
                           height: 500,
                           width: double.infinity,
+                        //    child: Image.asset("assets/f5.jpeg",
+                        //  fit: BoxFit.contain,
+                        // ),
                           child: CachedNetworkImage(
                             imageUrl: widget.product.image,
-                          )),
+                          )
+                          ),
                       Positioned(
                         top: 35,
                         right: 35,
                         child: Container(
+                          padding: EdgeInsets.all(12),
                             decoration: ShapeDecoration(
                                 color: CustomTheme.yellow,
                                 shape: CircleBorder(),
                                 shadows: CustomTheme.cardShadow),
-                            child: IconButton(
-                              icon: const Icon(Icons.share),
-                              color: Colors.black,
-                              onPressed: () {},
-                            )),
+                                child: GestureDetector(
+                                  child:Icon(Icons.shopping_cart) ,
+                                   onTap: (){
+                                        Navigator.push(context,MaterialPageRoute(builder: (context)=>CheckoutScreen())
+                                        );
+                                      },
+                                ),
+                            // child: IconButton(
+                            //   icon: const Icon(Icons.shopping_cart_checkout),
+                            //   color: Colors.black,
+                            //   onPressed: () {
+                            //             Navigator.push(context,MaterialPageRoute(builder: (context)=>CheckoutScreen())
+                            //             );
+                            //   },
+                            // )
+                            
+                            ),
                       ),
                     ],
                   ),
@@ -105,17 +123,23 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             Padding(
                                 padding: EdgeInsets.only(top: 20),
-                                child: Text(value1.user?.uid as String)),
+                                // child: Text("Rice"),
+child: Text(widget.product.title),
+                                // child: Text(value1.user?.uid as String)
+                                
+                                ),
                             Padding(
                                 padding: EdgeInsets.symmetric(vertical: 20),
                                 child: Row(
                                   children: [
-                                    Text("MRP"),
-                                    Text("\$ " + widget.product.price.toString())
+                                    // Text("MRP 200"),
+                                    Text("Rs " + widget.product.price.toString())
                                   ],
                                 )),
                             CustomButton(
+                              
                                 text: "Add to Cart",
+                               
                                 onPress: onAddToCart,
                                 loading: addButtonLoad),
                             Container(
@@ -127,11 +151,13 @@ class _ProductScreenState extends State<ProductScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
+                                  Container(
+                                    width: double.infinity,
                                     padding: EdgeInsets.symmetric(vertical: 20),
                                     child: Text(
-                                      "About the items",
-                                      style: Theme.of(context).textTheme.headline5!,
+                                      
+                                      "About the item",
+                                      style: Theme.of(context).textTheme.headline6!,
                                     ),
                                   ),
                                   Padding(
