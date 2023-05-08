@@ -49,17 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: Color.fromARGB(255, 230, 230, 230),
                       // border: Border.all()
                       ),
-                      child: TextFormField(
-                        // cursorHeight: 0,cursorWidth: 0,
+            //           child: TextFormField(
+            //             // cursorHeight: 0,cursorWidth: 0,
 
-                        enableInteractiveSelection: true,
-            decoration: const InputDecoration(
-              icon: Icon(Icons.search,color: Color.fromARGB(255, 143, 143, 143),),fillColor: Colors.grey,
-              border: InputBorder.none,
+            //             // enableInteractiveSelection: true,
+            // decoration: const InputDecoration(
+            //   icon: Icon(Icons.search,color: Color.fromARGB(255, 143, 143, 143),),fillColor: Colors.grey,
+            //   border: InputBorder.none,
               
-              hintText: 'Search',
+            //   hintText: 'Search',
               
-            ),),),
+            // ),),
+            
+            ),
 
                     Expanded(
                       child: ListView.builder(

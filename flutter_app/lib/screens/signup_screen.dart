@@ -3,7 +3,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/frontpage.dart';
-import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../reusuable_widgets/reusable_widget.dart';
@@ -169,10 +168,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       FirebaseAuth.instance
                           .createUserWithEmailAndPassword(   //using firebase authentication registers the user
                               email: _emailTextController.text,
-                              password: _passwordTextController.text)
+                              password: _passwordTextController.text
+                              
+                              )
                           .then((value) {
+                            String? u=value.user?.uid.toString();
+                            
+                            print(u);
                         print("Created New Account");
-                        createUser(name: _userNameTextController.text);   //saves Name of user
+                        createUser(name: _userNameTextController.text,Id:u);   //saves Name of user
                         
                         Navigator.push(   //To switch to new screen
                             context,
@@ -191,9 +195,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
 //method to save user details in database
-  Future createUser({required String name}) async {
+  Future createUser({required String name,required String? Id}) async {
     final docUser = FirebaseFirestore.instance.collection('users');
-    final user = User(id: docUser.id, name: name);
+    final user = User(id: Id.toString(), name: name);
+
+    // final user = User(id: docUser.id, name: name);
     final json = user.toJson();
     await docUser.add(json);
 

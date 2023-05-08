@@ -34,7 +34,7 @@ var id=u.uid;
 
     return Scaffold(
          appBar: AppBar(
-           
+           title: const Text("Your Orders",textAlign: TextAlign.start, style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,),),
             foregroundColor: Colors.white,
             backgroundColor: Color.fromARGB(255, 96, 212, 100),
             toolbarHeight: 70,
@@ -42,84 +42,100 @@ var id=u.uid;
 
 
 
-  body:   Container(
-  
-          child: StreamBuilder(
-            stream: firestoreDB,
-            builder: (context,  snapshot
-            ) {
-              if(!snapshot.hasData) return CircularProgressIndicator();
-              return ListView.builder(
-                
-                shrinkWrap: true,
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: ((context,int index) {
-                return 
-                Container(
-                  height: 130,
-                  decoration: BoxDecoration(
-                    borderRadius:BorderRadius.all(Radius.circular(15)),
-                    boxShadow:   [
-                    BoxShadow(
-                      color: Color.fromARGB(232, 204, 204, 204),
-                      offset: const Offset(
-                        5.0,
-                        5.0,
-                      ),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.0,
-                    ),
-                        BoxShadow(
-                      color: Colors.white,
-                      offset: const Offset(0.0, 0.0),
-                      blurRadius: 0.0,
-                      spreadRadius: 0.0,
-                    )
-                    ],
-                  ),
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
-
-                  child: 
-                      Row(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            
-                            flex: 3,
-                    child: CachedNetworkImage(
-                      height: 115,
-                      imageUrl: snapshot.data!.docs[index]['image'],
-                    fit:BoxFit.contain,
-                    ),
-
-                            
-                            ),
-                          Expanded(
-                            
-                            flex:7,
+  body:   Padding(
+    padding: EdgeInsets.all(2),
+    child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+    
+          Container(
+          
+                  child: StreamBuilder(
+                    stream: firestoreDB,
+                    builder: (context,  snapshot
+                    ) {
+                      if(!snapshot.hasData) return CircularProgressIndicator();
+                      return SingleChildScrollView(
+                        child: ListView.builder(
+                          
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: ((context,int index) {
+                          return 
+                          SingleChildScrollView(
                             child: Container(
-                              padding: EdgeInsets.all(14),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text( snapshot.data!.docs[index]['title'],
-                                  style: TextStyle( fontSize: 16),
+                              height: 130,
+                              decoration: BoxDecoration(
+                                borderRadius:BorderRadius.all(Radius.circular(15)),
+                                boxShadow:   [
+                                BoxShadow(
+                                  color: Color.fromARGB(232, 204, 204, 204),
+                                  offset: const Offset(
+                                    5.0,
+                                    5.0,
                                   ),
-                                  Text( snapshot.data!.docs[index]['price'].toString())
+                                  blurRadius: 10.0,
+                                  spreadRadius: 2.0,
+                                ),
+                                    BoxShadow(
+                                  color: Colors.white,
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                )
                                 ],
                               ),
-                            ))
-
-                        ],
-                      ),
-                      
-                    
-                );
-              }));
-            }),
-        ),
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.all(8),
+                                    
+                              child: 
+                                  Row(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        
+                                        flex: 3,
+                                child: CachedNetworkImage(
+                                  height: 115,
+                                  imageUrl: snapshot.data!.docs[index]['image'],
+                                fit:BoxFit.contain,
+                                ),
+                                    
+                                        
+                                        ),
+                                      Expanded(
+                                        
+                                        flex:7,
+                                        child: Container(
+                                          padding: EdgeInsets.all(14),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text( snapshot.data!.docs[index]['title'],
+                                              style: TextStyle( fontSize: 16),
+                                              ),
+                                              Text( snapshot.data!.docs[index]['price'].toString())
+                                            ],
+                                          ),
+                                        ))
+                                    
+                                    ],
+                                  ),
+                                  
+                                
+                            ),
+                          );
+                        })),
+                      );
+                    }),
+                ),
+        ],
+      ),
+    ),
+  ),
 
 
 

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -27,6 +29,16 @@ class _MyAccountState extends State<MyAccount> {
 
   @override
   Widget build(BuildContext context) {
+User u=Provider.of<ApplicationState>(context, listen: false).user!;
+  var firestoreDB=FirebaseFirestore.instance.collection("users").where("id", isEqualTo:u.uid).snapshots();
+
+
+     final cartRef =  FirebaseFirestore.instance
+          .collection("users").where("id",isEqualTo: u.uid)
+          ;
+          print(cartRef);
+         
+
     return  Container(
          width: MediaQuery.of(context).size.width,  //sizing an elements relative to screen size
           height: MediaQuery.of(context).size.height,
@@ -49,7 +61,7 @@ class _MyAccountState extends State<MyAccount> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Personal Details "),
+                  Text("Manali "),
                   
                   IconButton(icon:Icon(Icons.edit),onPressed: () {
                     Navigator.push(context,

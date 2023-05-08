@@ -6,11 +6,15 @@ import 'package:flutter_app/pages/fruits.dart';
 import 'package:flutter_app/pages/list_by_category.dart';
 import 'package:flutter_app/pages/profile.dart';
 import 'package:flutter_app/pages/profile1.dart';
+import 'package:flutter_app/pages/recommendation/crop_recommendation.dart';
+import 'package:flutter_app/pages/recommendation/fertilizer_recommendation.dart';
+import 'package:flutter_app/pages/vegetables.dart';
 import 'package:flutter_app/screens/add_product.dart';
 import 'package:flutter_app/screens/crop_screen.dart';
-import 'package:flutter_app/screens/fertilizer_screen.dart';
+import 'package:flutter_app/screens/myCommunity.dart';
+// import 'package:flutter_app/screens/fertilizer_screen.dart';
 // import 'package:flutter_app/screens/home_screen.dart';
-import 'package:flutter_app/screens/my_community.dart';
+import 'package:flutter_app/screens/nearbyShops.dart';
 import 'package:flutter_app/screens/test.dart';
 
 import 'checkout.dart';
@@ -80,7 +84,7 @@ class _frontPageState extends State<frontPage> {
             frontpage1(),
             HomeScreen(),
             // AddProductScreen(),
-            MyCommunityScreen(),
+            MyCommunity(),
             MyAccount()
           ]),
 
@@ -161,28 +165,37 @@ class frontpage1 extends StatelessWidget {
                               color: Color.fromARGB(255, 199, 198, 198)),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Image.asset("assets/fertilizer.jpeg"),
-                            // fit: BoxFit.contain,
-                          ),
-                          Text(
-                            "Fertilizer Recomendation",
-                            style: TextStyle(color: Colors.grey[600]),
-                          )
-                        ],
+                    GestureDetector(
+                     onTap: (() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Fertilizer_Recommendation2()));
+                      }),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Image.asset("assets/fertilizer.jpeg"),
+                              // fit: BoxFit.contain,
+                            ),
+                            Text(
+                              "Fertilizer Recomendation",
+                              style: TextStyle(color: Colors.grey[600]),
+                            )
+                          ],
+                        ),
+                        padding: EdgeInsets.all(9),
+                        height: 120,
+                        width: 180,
+                        decoration: BoxDecoration(
+                            // border: Border.all(
+                            //     width: 3,
+                            //     color: Color.fromARGB(255, 199, 198, 198)),
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
                       ),
-                      padding: EdgeInsets.all(9),
-                      height: 120,
-                      width: 180,
-                      decoration: BoxDecoration(
-                          // border: Border.all(
-                          //     width: 3,
-                          //     color: Color.fromARGB(255, 199, 198, 198)),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
+
                   ],
                 ),
               ),
@@ -262,7 +275,7 @@ class frontpage1 extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      cropList()));
+                                                      NearbyShops()));
                                         },
                                       ),
                                     )),

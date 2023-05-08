@@ -10,7 +10,6 @@ import 'package:flutter_app/controllers/product.dart';
 import 'package:flutter_app/reusuable_widgets/commanDialog.dart';
 import 'package:flutter_app/screens/crop_screen.dart';
 import 'package:flutter_app/screens/fertilizer_screen.dart';
-import 'package:flutter_app/screens/my_community.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/screens/signup_screen.dart';
 import 'package:flutter_app/screens/storage_service.dart';

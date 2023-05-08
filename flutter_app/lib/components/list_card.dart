@@ -17,7 +17,7 @@ class ListCard extends StatelessWidget {
       decoration: CustomTheme.getCardDecoration(),
       child: Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(35),
+          borderRadius: BorderRadius.circular(25),
           child: Row(
             children: [
               Expanded(
@@ -57,7 +57,14 @@ class ListCard extends StatelessWidget {
                           child: Text(
                             "Rs "+cart.price.toString(),
                             style: Theme.of(context).textTheme.headlineSmall,
-                          ),
+                          ),                       
+                        ),
+                          Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            "COD",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),                       
                         ),
                       ],
                     ),

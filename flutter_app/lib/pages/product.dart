@@ -13,7 +13,9 @@ import 'package:flutter_app/utils/application_state.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
 import 'package:flutter/src/widgets/text.dart';
 import 'package:flutter_app/utils/firestore.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class ProductScreen extends StatefulWidget {
@@ -171,13 +173,26 @@ child: Text(widget.product.title),
                               ),
                             ),
                             Container(
+
+                              padding: EdgeInsets.all(7),
+child: ElevatedButton(child: Text("Call"), onPressed: () {
+  // FlutterPhoneDirectCaller.callNumber('9881719446');
+  // launch('tel:+9881719');
+},),
+// Text("Contact Supplier",
+                                // style:TextStyle(color: Colors.black,fontSize: 28)
+                            
+                              
+                            ),
+                            
+                            Container(
                               width: double.infinity,
                                  margin: EdgeInsets.only( bottom: 15),
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.green[100]),
-                              child: Text("77379837",
+                              child: Text("091450 63875",
                                 style: Theme.of(context).textTheme.headline6!,
                               ),),
                                 Container(
@@ -187,7 +202,7 @@ child: Text(widget.product.title),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.red[100]),
-                              child: Text("@email.com",
+                              child: Text("goanfarmersmarket@gmail.com",
                                 style: Theme.of(context).textTheme.headline6!,
                               ),),
 
@@ -198,7 +213,7 @@ child: Text(widget.product.title),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.grey[100]),
-                                child: Text("Address",
+                                child: Text("House No 61/A, 1st Daddio, Navelim, India, Goa",
                                   style: Theme.of(context).textTheme.headline6!,
                                 ),
                               )

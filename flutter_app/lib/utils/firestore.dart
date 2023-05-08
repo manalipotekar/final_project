@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app/models/product.dart';
 import 'package:flutter_app/models/cart.dart';
 import '../models/cart.dart';
@@ -20,13 +21,13 @@ class FirestoreUtil {
     try {
       final productRef = FirebaseFirestore.instance
           .collection(productCollection)
-          // .where("title", whereIn:["Yellow shoes"])
 
           .withConverter<Product>(
               fromFirestore: (snapshot, _) =>
                   Product.fromJson(snapshot.data()!),
               toFirestore: (product, _) => product.toJson());
       QuerySnapshot<Product> productDoc;
+
       if (ids != null && ids.isNotEmpty) {
         productDoc = await productRef.where('id', whereIn: ids).get();
       } else {
@@ -128,13 +129,13 @@ class FirestoreUtil {
     }
   }
 
-  static createOrder(User? user){
+  static createOrder(User? user) async {
 
-    Future<List<Cart>> cart=FirestoreUtil.getCart(user);
+   List<Cart> cart=await FirestoreUtil.getCart(user);
 
     List<Cart> orders = [];
     
-    orders=cart as List<Cart>;
+    orders=cart;
     
     final docCart = FirebaseFirestore.instance.collection('orders');
    
@@ -146,26 +147,73 @@ class FirestoreUtil {
         final  cart = Cart(orders[i].title,orders[i].price,id, orders[i].description, orders[i].image, orders[i].category, orders[i].count);
         final json =cart.toJson();
            docCart.add(json);
- 
-}
+  }
  }on FirebaseException catch (e, stacktrace) {
       print("error");
       log("Error adding to orders", stackTrace: stacktrace, error: e);
     }
 
 
+
+
+  
+  try {
+    final cartRef = await FirebaseFirestore.instance
+          .collection(customerCollection)
+          .doc(user?.uid)
+          .collection(cartCollection)
+          .get();
+
+      List<String> productIds = [];
+      for (var element in cartRef.docs) {
+        productIds.add(element['id']);
+      }
+
+
+  List<Product> products = await getProducts(productIds);
+      for (var element in cartRef.docs) {
+        Product product = products.firstWhere((prod) => prod.id == element.id);
+
+          final cartDeleteRef = await FirebaseFirestore.instance
+          .collection(customerCollection)
+          .doc(user?.uid).collection(cartCollection).doc(product.id).delete().then(
+      (doc) => print("Document deleted"),
+      onError: (e) => print("Error updating document $e"),
+    
+
+    );
+       
+
+      }
+     
+    } on FirebaseException catch (e, stacktrace) {
+      log("Error deleting to cart", stackTrace: stacktrace, error: e);
+    }
+
+
   }
+
+  
+  
+
+
+
 
   static Future<List<Cart>> getCart(User? user) async {
     List<Cart> carts = [];
     List<Cart> orders = [];
+
     try {
       final cartRef = await FirebaseFirestore.instance
           .collection(customerCollection)
           .doc(user?.uid)
           .collection(cartCollection)
           .get();
-
+      
+      if(cartRef.size==0){
+        print("object empty");
+        return carts;
+      }
       List<String> productIds = [];
       for (var element in cartRef.docs) {
         productIds.add(element['id']);
@@ -188,33 +236,8 @@ class FirestoreUtil {
    
  dynamic id =user?.uid;
    
-  dynamic t;
 
-
- Map<String, dynamic> c=orders.asMap().cast<String,dynamic >();
  print(orders[0].title);
- print(orders.length);
-
-
-
-//    try {
-//     for (int i = 0; i < orders.length; i++) {
-//         final  cart = Cart(orders[i].title,orders[i].price,id, orders[i].description, orders[i].image, orders[i].category, orders[i].count);
-//         final json =cart.toJson();
-//            docCart.add(json);
- 
-// }
-       
-                 
-//           print(docCart);
-     
-    
-       
-//     } on FirebaseException catch (e, stacktrace) {
-//       print("error");
-//       log("Error adding to orders", stackTrace: stacktrace, error: e);
-//     }
-
 
 
     return carts;

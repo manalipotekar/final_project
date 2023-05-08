@@ -6,13 +6,11 @@ import 'package:flutter_app/pages/frontpage.dart';
 import 'package:flutter_app/screens/crop_screen.dart';
 import 'package:flutter_app/screens/fertilizer_screen.dart';
 import 'package:flutter_app/screens/home.dart';
-import 'package:flutter_app/screens/my_community.dart';
 import 'package:flutter_app/screens/signup_screen.dart';
 import 'package:flutter_app/screens/upload_post.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../reusuable_widgets/reusable_widget.dart';
 import '../utils/color_utils.dart';
-import 'home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

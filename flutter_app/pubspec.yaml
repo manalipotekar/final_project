@@ -51,6 +51,8 @@ dependencies:
   flutter_stripe: ^8.0.0+1
   getwidget: ^3.0.1
   firebase_admin: ^0.2.0
+  flutter_phone_direct_caller: ^2.1.1
+  url_launcher: ^6.1.10
   
   
 dev_dependencies:

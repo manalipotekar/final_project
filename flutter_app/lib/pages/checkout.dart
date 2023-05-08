@@ -15,6 +15,8 @@ import 'package:flutter_app/utils/firestore.dart';
 // import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:provider/provider.dart';
 
+import 'frontpage.dart';
+
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
 
@@ -39,8 +41,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _checkoutButtonLoading = true;
     });
 
-
-
     String error = await CommonUtil.checkoutFlow(
         Provider.of<ApplicationState>(context, listen: false).user!);
     if (error.isEmpty) {
@@ -57,7 +57,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     });
   }
 
-late Cart c;
+  late Cart c;
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,6 @@ late Cart c;
               snapshot.data!.isNotEmpty) {
             return Scaffold(
               appBar: AppBar(
-     
-
                 backgroundColor: Colors.green,
               ),
               body: SingleChildScrollView(
@@ -87,29 +85,54 @@ late Cart c;
                         itemBuilder: ((context, index) {
                           return ListCard(cart: snapshot.data![index]);
                         })),
-
                     priceFooter(snapshot.data!),
-                    
                     Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20, horizontal: 30),
+                      child: CustomButton(
+                        text: "Checkout",
+                        onPress: () async {
+                          FirestoreUtil.createOrder(
+                              Provider.of<ApplicationState>(context,
+                                      listen: false)
+                                  .user!);
 
-                       
-                      child: CustomButton(text: "Checkout", 
-                      onPress: 
-                      (){
-                        FirestoreUtil.createOrder(Provider.of<ApplicationState>(context, listen: false).user!);
-                      }
-  //                     FirestoreUtil.createOrder(
-  //                       Provider.of<ApplicationState>(context, listen: false).user,
-                      
-  // carts
-  //                     )
-                      
-                        ,loading: _checkoutButtonLoading,),
+                          bool result = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Confirmation'),
+                                content: Text('Your Order has been confirmed'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          //To switch to new screen
+                                          context,
+                                          MaterialPageRoute(
+                                              //route to next page
+                                              builder: (context) =>
+                                                  frontPage()));
+                                    },
+                                    child: Text('Back'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                        //                     FirestoreUtil.createOrder(
+                        //                       Provider.of<ApplicationState>(context, listen: false).user,
+
+                        // carts
+                        //                     )
+
+                        ,
+                        loading: _checkoutButtonLoading,
+                      ),
                     ),
-                    Text("  Your Orders  ",  style: Theme.of(context).textTheme.headlineSmall),
-
+                    Text("  Your Orders  ",
+                        style: Theme.of(context).textTheme.headlineSmall),
                   ],
                 ),
               ),

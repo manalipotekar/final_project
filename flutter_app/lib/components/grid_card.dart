@@ -107,7 +107,7 @@ class GridCard extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(25.0),
                                     ))),
                                 onPressed: () {},
-                                child: Text(
+                                child: Text( "Rs: "+
                                   product.price.toString(),
                                 )),
                           )
