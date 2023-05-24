@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/pages/crop_info/cropInfo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class cropList extends StatefulWidget {
   const cropList({super.key});
@@ -12,6 +14,9 @@ class cropList extends StatefulWidget {
 }
 
 class _cropListState extends State<cropList> {
+
+  var firestoreDB = FirebaseFirestore.instance.collection("crop-info").snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,49 +28,65 @@ class _cropListState extends State<cropList> {
             backgroundColor: Color.fromARGB(255, 96, 212, 100),
             toolbarHeight: 70,
           ),
-        body: GridView.builder(
-            itemCount: 10,
-            gridDelegate:
+        body:
+
+      StreamBuilder(
+                                stream: firestoreDB,
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return CircularProgressIndicator();
+                                  return SingleChildScrollView(
+                                    child: 
+
+			GridView.builder(
+        gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                  decoration: BoxDecoration(
-                    // border: Border.all(),
-                    // borderRadius: BorderRadius.circular(20)
-                  ),
-                  margin: EdgeInsets.all(10),
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.docs.length,
+                                        
+                                        itemBuilder: ((context, int index) {
+                                          return SingleChildScrollView(
+                                            child: Container(
+                                            
+ margin: EdgeInsets.all(10),
                   // padding: EdgeInsets.all(10),
-                  child: GestureDetector(
-                      onTap:() {
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>CropInfo()));
-                      }  ,          
+                  child: Container(
 
-                      child: Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            
-                            Expanded(
-                                flex: 8,
-                                // child: Text("data"),
-                                child: Container(
-                                  
-                                  child: Image.asset("assets/cashew.jpg",fit:BoxFit.cover),
-                                )
-                                ),
-                             Expanded(flex:2,
-                              child: Container(
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                         GestureDetector(
+                          onTap: (){
+
+                                      Navigator.push(context,MaterialPageRoute(builder: (context)=>CropInfo(crop_name: snapshot.data?.docs[index]['name'],)));
+                          },
+
+                           child: Container(
+                            height: 150,
+                            child: Image.asset("assets/cashew.jpg",fit:BoxFit.cover),
+                           ),
+                         ),
+                         Container(
                                 padding: EdgeInsets.all(3),
-                                child: Text("Cashew",
+                                child: Text( snapshot.data?.docs[index]['name'],
                                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),),
-                              )),
-                            
-                          
-                          ],
-                        ),),
+                              )
+                        ],
+                      )
+     
 
-                      ));
-            }));
+
+                                            ),),
+                                          );
+                                        })),
+                                  );
+                                }),
+                                
+
+            
+            
+            
+            
+            );
   }
 }

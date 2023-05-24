@@ -177,6 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             print(u);
                         print("Created New Account");
                         createUser(name: _userNameTextController.text,Id:u);   //saves Name of user
+                  value.user?.updateDisplayName(_userNameTextController.text);
                         
                         Navigator.push(   //To switch to new screen
                             context,

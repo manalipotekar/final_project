@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,41 +11,23 @@ import '../utils/application_state.dart';
 
 
 
-class MyOrders extends StatefulWidget {
-  const MyOrders({Key? key}) : super(key: key);
+
+class AllOrders extends StatefulWidget {
+  const AllOrders({super.key});
 
   @override
-  State<MyOrders> createState() => _MyOrdersState();
+  State<AllOrders> createState() => _AllOrdersState();
 }
 
-class _MyOrdersState extends State<MyOrders> {
-  late String id;
-  late Stream<QuerySnapshot<Object?>> mergedStream;
-
+class _AllOrdersState extends State<AllOrders> {
   @override
-
   Widget build(BuildContext context) {
-   User user=Provider.of<ApplicationState>(context, listen: false).user!;
-var id=user.uid;
-  var firestoreDB=FirebaseFirestore.instance.collection("orders").where('id',isEqualTo: id).snapshots();
-                                        
-print(user);
-if (user != null) {
-    for (final providerProfile in user.providerData) {
-        // ID of the provider (google.com, apple.cpm, etc.)
-        final provider = providerProfile.providerId;
-
-        // UID specific to the provider
-        final uid = providerProfile.uid;
-
-        // Name, email address, and profile photo URL
-        final name = providerProfile.displayName;
-        final emailAddress = providerProfile.email;
-
-        final profilePhoto = providerProfile.photoURL;
-    print(emailAddress);
-    }
-}
+   User u=Provider.of<ApplicationState>(context, listen: false).user!;
+var id=u.uid;
+  var firestoreDB=FirebaseFirestore.instance.collection("orders").snapshots();
+  var firestoreDB1=FirebaseFirestore.instance.collection("users").snapshots();
+  
+  // print(firestoreDB1.map((event) => event.toString()));
 
     return Scaffold(
          appBar: AppBar(
@@ -58,7 +38,9 @@ if (user != null) {
           ),
 
 
-  body:   Padding(
+
+  body:  
+   Padding(
     padding: EdgeInsets.all(2),
     child: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
@@ -130,12 +112,15 @@ if (user != null) {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text( 
-                                                
-                                                snapshot.data!.docs[index]['title'],
+                                              Text( snapshot.data!.docs[index]['title'],
                                               style: TextStyle( fontSize: 16),
                                               ),
                                               Text( snapshot.data!.docs[index]['price'].toString())
+                                            ,
+                                              Text("Ordered By " +
+                                              
+                                             
+                                              snapshot.data!.docs[index]['username'].toString())
                                             ],
                                           ),
                                         ))
@@ -169,6 +154,3 @@ if (user != null) {
     );
   }
 }
-
-
-

@@ -140,13 +140,17 @@ class FirestoreUtil {
     final docCart = FirebaseFirestore.instance.collection('orders');
    
  dynamic id =user?.uid;
+ dynamic username =user?.displayName;
+
+
   
 
  try{
   for (int i = 0; i < orders.length; i++) {
         final  cart = Cart(orders[i].title,orders[i].price,id, orders[i].description, orders[i].image, orders[i].category, orders[i].count);
         final json =cart.toJson();
-           docCart.add(json);
+           docCart.add(json,).then((value) => value.update({"username": username}));
+          //  docCart.add({"username": "shela"});
   }
  }on FirebaseException catch (e, stacktrace) {
       print("error");

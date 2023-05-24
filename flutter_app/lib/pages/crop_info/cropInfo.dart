@@ -1,17 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CropInfo extends StatefulWidget {
-  const CropInfo({super.key});
+    final String crop_name;
 
+  const CropInfo({required this.crop_name,super.key});
   @override
   State<CropInfo> createState() => _CropInfoState();
+
 }
 
 class _CropInfoState extends State<CropInfo> {
   bool viewVisible = false;
   //if want to create array in use dictionary
+
+
 
   void showWidget() {
     if (viewVisible == true) {
@@ -33,13 +38,35 @@ class _CropInfoState extends State<CropInfo> {
 
   @override
   Widget build(BuildContext context) {
+
+  String cropName=widget.crop_name.toString();
+  var firestoreDB = FirebaseFirestore.instance.collection("crop-info").where('name' ,isEqualTo: cropName).snapshots();
+// print(firestoreDB);
+
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Color.fromARGB(255, 96, 212, 100),
         toolbarHeight: 70,
       ),
-      body: Container(
+
+      body: 
+      
+      
+     StreamBuilder(
+                                stream: firestoreDB,
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return CircularProgressIndicator();
+                                  return SingleChildScrollView(
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.docs.length,
+                                        itemBuilder: ((context, int index) {
+                                          return SingleChildScrollView(
+                                            child: 
+
+ Container(
          width: MediaQuery.of(context).size.width,  //sizing an elements relative to screen size
           height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
@@ -55,8 +82,10 @@ class _CropInfoState extends State<CropInfo> {
                   children: [
                     Container(
                       padding: EdgeInsets.all(8),
-                      child: Text(
-                        "Cashew",
+                      child: Text( 
+                        // snapshot.data?.docs[index]['name'],
+                        widget.crop_name.toString(),
+                        // "Cashew",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -139,6 +168,18 @@ class _CropInfoState extends State<CropInfo> {
 
         
                   ]))),
+
+
+
+
+
+                                          );
+                                        })),
+                                  );
+                                }),
+
+
+
     );
   }
 }

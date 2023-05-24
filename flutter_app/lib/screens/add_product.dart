@@ -8,12 +8,13 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/controllers/product.dart';
 import 'package:flutter_app/reusuable_widgets/commanDialog.dart';
-import 'package:flutter_app/screens/crop_screen.dart';
-import 'package:flutter_app/screens/fertilizer_screen.dart';
-import 'package:flutter_app/screens/signin_screen.dart';
-import 'package:flutter_app/screens/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter_app/screens/storage_service.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../utils/application_state.dart';
 
 List<Product> loginUserData = [];
 
@@ -71,13 +72,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _formKey = GlobalKey<FormState>();
 // SignUpScreen s=Get.find();
 
+
   Map<String, dynamic> productData = {
     "p_name": "",
     "p_price": "",
     "p_upload_date": DateTime.now().millisecondsSinceEpoch,
-    "phone_number": "",
+    "phone_number": 0,
     "product_image": "",
     "user_Id": "",
+    "category":"fruits",
+    "p_description":"This is product"
   };
 
   void _pickedImage(File image) {
@@ -108,17 +112,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
     print("Updated $response");
     var imageUrl = await ref.getDownloadURL();
 
+
+
     try {
       // CommanDialog.showLoading();
 
       var response =
           await FirebaseFirestore.instance.collection('productlist').add({
         'product_name': productdata['p_name'],
-        'product_price': productdata['p_price'],
+        'product_price': productdata['p_price'] ,
         "product_upload_date": productdata['p_upload_date'],
         'product_image': imageUrl,
-        // 'user_Id':   s,
+        'user_Id':   productData['user_Id'],
         "phone_number": productdata['phone_number'],
+        "category": productData['category'],
+        "product_description": productData['p_description']
       });
       print("Firebase response1111 $response");
       // CommanDialog.hideLoading();
@@ -132,6 +140,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+   User user=Provider.of<ApplicationState>(context, listen: false).user!;
+   String id=user.uid.toString();
+
     return Scaffold(
       
       backgroundColor: Color.fromARGB(255, 252, 238, 196),
@@ -139,7 +150,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Add New Post'),
+        title: Text('Add New Product'),
       ),
       body: Card(
         
@@ -162,21 +173,41 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   onSaved: (value) {
                     productData['p_name'] = value;
+                    productData['user_Id']=id;
                   },
                 ),
    TextFormField(
+      onSaved: (value) {
+                    productData['p_description'] = value;
+                  },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                  
                     // labelText: 'Product Name',
                     labelText: 'Description',labelStyle: TextStyle(color: Colors.grey,),
                   ),
-                  // onSaved: (value) {
-                  //   productData['p_name'] = value;
-                  // },
+              
                 ),
-
-
+  TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Category',labelStyle: TextStyle(color: Colors.grey,),
+                  ),
+                  onSaved: (value) {
+                    productData['category'] = value;
+                    
+                  },
+                ),
+  TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Price',labelStyle: TextStyle(color: Colors.grey,),
+                  ),
+                  onSaved: (value) {
+                    productData['p_price'] = int.parse(value!) ;
+                    
+                  },
+                ),
 
                 // TextFormField(
                 //   keyboardType: TextInputType.number,

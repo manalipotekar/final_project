@@ -55,20 +55,20 @@ class _frontPageState extends State<frontPage> {
                       ),
                       child: Text(
                         "Home",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle(fontSize: 10),
                       ),
                     ),
                     Tab(
                       icon: Icon(Icons.shopping_bag),
                       child: Text(
                         "Shop",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle(fontSize: 10),
                       ),
                     ),
                     Tab(
                       icon: Icon(Icons.people),
                       child: Text(
-                        "My Community",
+                        "Community",
                         style: TextStyle(fontSize: 10),
                       ),
                     ),
@@ -76,15 +76,15 @@ class _frontPageState extends State<frontPage> {
                       icon: Icon(Icons.person),
                       child: Text(
                         "My Account",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle(fontSize: 10),
                       ),
                     ),
                   ])),
           body: TabBarView(children: [
             frontpage1(),
             HomeScreen(),
-            // AddProductScreen(),
-            MyCommunity(),
+            AddProductScreen(),
+            // MyCommunity(),
             MyAccount()
           ]),
 
@@ -146,7 +146,7 @@ class frontpage1 extends StatelessWidget {
                         ),
                         padding: EdgeInsets.all(9),
                         height: 120,
-                        width: 180,
+                        width: 140,
                         decoration: BoxDecoration(
                             // border: Border.all(
                             //     width: 3,
@@ -187,7 +187,7 @@ class frontpage1 extends StatelessWidget {
                         ),
                         padding: EdgeInsets.all(9),
                         height: 120,
-                        width: 180,
+                        width: 150,
                         decoration: BoxDecoration(
                             // border: Border.all(
                             //     width: 3,

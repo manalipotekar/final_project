@@ -53,7 +53,10 @@ dependencies:
   firebase_admin: ^0.2.0
   flutter_phone_direct_caller: ^2.1.1
   url_launcher: ^6.1.10
-  
+  async: ^2.11.0
+  rxdart: ^0.27.7
+  google_maps_flutter: ^2.1.1
+  maps_launcher: ^2.0.1
   
 dev_dependencies:
   flutter_test:
