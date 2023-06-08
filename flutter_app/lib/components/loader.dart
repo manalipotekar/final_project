@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 
 class loader extends StatelessWidget {
@@ -12,7 +10,7 @@ class loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.scale(
       scale: scale,
-      child: CircularProgressIndicator(color: Colors.black, semanticsLabel: 'Circular progress bar',),
+      child: const CircularProgressIndicator(color: Colors.black, semanticsLabel: 'Circular progress bar',),
     );
   }
 }

@@ -10,17 +10,17 @@ class CommanDialog {
         ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Container(
+          child: SizedBox(
             height: 40,
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Center(
+                const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Text(
@@ -44,7 +44,7 @@ class CommanDialog {
       String description = "Something went wrong "}) {
     Get.dialog(
       Dialog(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -53,20 +53,20 @@ class CommanDialog {
             children: [
               Text(
                 title,
-                style: Get.textTheme.headline6,
+                style: Get.textTheme.titleLarge,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 description,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
               ElevatedButton(
                 onPressed: () {
                   if (Get.isDialogOpen!) Get.back();
                 },
-                child: Text("Okay"),
+                child: const Text("Okay"),
               ),
             ],
           ),

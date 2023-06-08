@@ -18,14 +18,14 @@ class _HomeState1 extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Simple Flask App')),
+      appBar: AppBar(title: const Text('Simple Flask App')),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             TextField(
               onChanged: (value) {
-                url = 'http://10.0.2.2:5000/api?query=' + value.toString();
+                url = 'http://10.0.2.2:5000/api?query=$value';
               },
             ),
             TextButton(
@@ -42,13 +42,13 @@ class _HomeState1 extends State<Home> {
                     output = decoded['output'];
                   });
                 },
-                child: Text(
+                child: const Text(
                   'Fetch ASCII Value',
                   style: TextStyle(fontSize: 20),
                 )),
             Text(
               output,
-              style: TextStyle(fontSize: 40, color: Colors.green),
+              style: const TextStyle(fontSize: 40, color: Colors.green),
             )
           ]),
         ),

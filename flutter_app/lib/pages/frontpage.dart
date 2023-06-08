@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/pages/crop_info/cropList.dart';
 import 'package:flutter_app/pages/fruits.dart';
-import 'package:flutter_app/pages/list_by_category.dart';
-import 'package:flutter_app/pages/profile.dart';
 import 'package:flutter_app/pages/profile1.dart';
 import 'package:flutter_app/pages/recommendation/crop_recommendation.dart';
 import 'package:flutter_app/pages/recommendation/fertilizer_recommendation.dart';
 import 'package:flutter_app/pages/vegetables.dart';
-import 'package:flutter_app/screens/add_product.dart';
-import 'package:flutter_app/screens/crop_screen.dart';
+
+
+// import 'package:flutter_app/screens/crop_screen.dart';
 import 'package:flutter_app/screens/myCommunity.dart';
 // import 'package:flutter_app/screens/fertilizer_screen.dart';
 // import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/nearbyShops.dart';
-import 'package:flutter_app/screens/test.dart';
+import 'package:flutter_app/utils/color_utils.dart';
 
-import 'checkout.dart';
 import 'home.dart';
+import 'my_community.dart';
 
 class frontPage extends StatefulWidget {
   const frontPage({super.key});
@@ -33,24 +30,40 @@ class _frontPageState extends State<frontPage> {
     return DefaultTabController(
         length: 4,
         child: Scaffold(
+          backgroundColor:  Colors.green[100],
           appBar: AppBar(
             // leading:Icon(Icons.kitesurfing_outlined),
-            title: Text(
-              "AGRICROP",
+            title: const Text(
+              "",
             ),
             foregroundColor: Colors.white,
-            backgroundColor: Color.fromARGB(255, 96, 212, 100),
-            toolbarHeight: 70,
+          backgroundColor: Color(0xff7ED957),
+            // backgroundColor: Colors.blue,
+            toolbarHeight: 100,
+            shadowColor:Colors.white,
+                  automaticallyImplyLeading: false,
+                    shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0))),
           ),
-          bottomNavigationBar: Container(
+
+
+          
+          bottomNavigationBar:  Container(
               height: 60,
-              child: const TabBar(
+              color: Colors.white,
+              
+              child: TabBar(
+         
+               
                   padding: EdgeInsets.symmetric(vertical: 0),
                   indicatorColor: Colors.green,
                   labelColor: Colors.green,
                   tabs: [
                     Tab(
                       icon: Icon(
+                        
                         Icons.home,
                       ),
                       child: Text(
@@ -80,10 +93,14 @@ class _frontPageState extends State<frontPage> {
                       ),
                     ),
                   ])),
-          body: TabBarView(children: [
+          body: const TabBarView(children: [
+            // Testing(),
             frontpage1(),
             HomeScreen(),
-            AddProductScreen(),
+            // MainScreen(),
+            // HomePage(),
+            // AddProductScreen(),
+            MyCommunityScreen(),
             // MyCommunity(),
             MyAccount()
           ]),
@@ -103,21 +120,24 @@ class frontpage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+                  height: MediaQuery.of(context).size.height * 0.75,
+      
       decoration: BoxDecoration(
+        
         color: Colors.green[100],
       ),
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 9),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.only(top: 9),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Row(
                   // crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,9 +149,19 @@ class frontpage1 extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => FertilizerScreen()));
+                                builder: (context) => const FertilizerScreen()));
                       }),
                       child: Container(
+                        padding: const EdgeInsets.all(6),
+                        height: 110,
+                        width: 140,
+                        decoration: const BoxDecoration(
+                            // border: Border.all(
+                            //     width: 3,
+                            //     color: Color.fromARGB(255, 199, 198, 198)),
+
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         child: Column(
                           children: [
                             Expanded(
@@ -139,21 +169,11 @@ class frontpage1 extends StatelessWidget {
                               // fit: BoxFit.contain,
                             ),
                             Text(
-                              "Crop Recommendation",
+                              "Crop recomendation",
                               style: TextStyle(color: Colors.grey[600]),
                             )
                           ],
                         ),
-                        padding: EdgeInsets.all(9),
-                        height: 120,
-                        width: 140,
-                        decoration: BoxDecoration(
-                            // border: Border.all(
-                            //     width: 3,
-                            //     color: Color.fromARGB(255, 199, 198, 198)),
-
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
                       ),
                     ),
                     Container(
@@ -162,72 +182,82 @@ class frontpage1 extends StatelessWidget {
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 1,
-                              color: Color.fromARGB(255, 199, 198, 198)),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                              color: const Color.fromARGB(255, 199, 198, 198)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20))),
                     ),
                     GestureDetector(
                      onTap: (() {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Fertilizer_Recommendation2()));
+                                builder: (context) => const NearbyShops()));
                       }),
                       child: Container(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Image.asset("assets/fertilizer.jpeg"),
-                              // fit: BoxFit.contain,
-                            ),
-                            Text(
-                              "Fertilizer Recomendation",
-                              style: TextStyle(color: Colors.grey[600]),
-                            )
-                          ],
-                        ),
-                        padding: EdgeInsets.all(9),
-                        height: 120,
+                        padding: const EdgeInsets.all(6),
+                        height: 110,
                         width: 150,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             // border: Border.all(
                             //     width: 3,
                             //     color: Color.fromARGB(255, 199, 198, 198)),
                             borderRadius: BorderRadius.all(Radius.circular(20))),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Image.asset("assets/rice.jpeg"),
+                              // fit: BoxFit.contain,
+                            ),
+                            Text(
+                              "Nearby Shops",
+                              style: TextStyle(color: Colors.grey[600]),
+                            )
+                          ],
+                        ),
                       ),
                     ),
 
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 13,
               ),
               Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 4),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.only(top: 8),
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(20),
                             topLeft: Radius.circular(20))),
-                    child: Text(
-                        "    Shop Home Grown Products                             ",
+                    child: const Text(
+                        "     Shop Home Grown Products                             ",
                         style: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 22)),
+                            fontWeight: FontWeight.normal, fontSize: 21)),
                   ),
                   Column(
                     children: [
                       Container(
                         child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
+                                padding: const EdgeInsets.all(5),
+                                height: 100,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 3,
+                                        color:
+                                            const Color.fromARGB(255, 199, 198, 198)),
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(20))),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -242,25 +272,25 @@ class frontpage1 extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>FruitsScreen()));
+                                  builder: (context) =>const FruitsScreen()));
                         },
                                       ),
                                     )),
-                                    Text("Fruits")
+                                    const Text("Fruits")
                                   ],
                                 ),
-                                padding: EdgeInsets.all(5),
-                                height: 110,
-                                width: 160,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(6),
+                                height: 100,
+                                width: 150,
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         width: 3,
                                         color:
-                                            Color.fromARGB(255, 199, 198, 198)),
+                                            const Color.fromARGB(255, 199, 198, 198)),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                              ),
-                              Container(
+                                        const BorderRadius.all(Radius.circular(20))),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -275,23 +305,13 @@ class frontpage1 extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      NearbyShops()));
+                                                      const VegetablesScreen()));
                                         },
                                       ),
                                     )),
-                                    Text("Vegetables")
+                                    const Text("Vegetables")
                                   ],
                                 ),
-                                padding: EdgeInsets.all(6),
-                                height: 110,
-                                width: 160,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 3,
-                                        color:
-                                            Color.fromARGB(255, 199, 198, 198)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
                               ),
                             ],
                           ),
@@ -300,8 +320,8 @@ class frontpage1 extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(6),
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                     child: Row(
@@ -309,47 +329,48 @@ class frontpage1 extends StatelessWidget {
                       children: [
                         Container(
                           
+                          padding: const EdgeInsets.all(9),
+                          height: 100,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 3,
+                                  color: const Color.fromARGB(255, 199, 198, 198)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20))),
+                          
                           child: Column(
                             children: [
                               Expanded(
                                   child: Image.asset("assets/coconut.jpeg")),
-                              Text("Oils",),
+                              const Text("Oils",),
                             ],
                           ),
-                          padding: EdgeInsets.all(9),
-                          height: 110,
-                          width: 160,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(9),
+                          height: 100,
+                          width: 150,
                           decoration: BoxDecoration(
                               border: Border.all(
                                   width: 3,
-                                  color: Color.fromARGB(255, 199, 198, 198)),
+                                  color: const Color.fromARGB(255, 199, 198, 198)),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                        ),
-                        Container(
+                                  const BorderRadius.all(Radius.circular(20))),
                           child: Column(
                             children: [
                               Expanded(child: Image.asset("assets/rice.jpeg")),
-                              Text("Rice")
+                              const Text("Rice")
                             ],
                           ),
-                          padding: EdgeInsets.all(9),
-                          height: 110,
-                          width: 160,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 3,
-                                  color: Color.fromARGB(255, 199, 198, 198)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
                         ),
                       ],
                     ),
                   ),
                   Container(
                     width:double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 172),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.symmetric(horizontal: 100),
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(20),
@@ -359,61 +380,62 @@ class frontpage1 extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         },
                         child: Container(
-                            margin: EdgeInsets.all(3),
-                            padding: EdgeInsets.all(4),
+                          width: 100,
+                            margin: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.green,
+                              color: Color(0xff7ED957),
                             ),
-                            child: Text(
-                              "more",
+                            child: const Text(
+                              "Others",textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.white),
                             )),
                       ))
                 ],
               ),
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 18,
               ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                 ),
                 width: 410,
                 padding: const EdgeInsets.only(top: 6, left: 5),
                 child:
-                    Text("  Cultivation Tips", style: TextStyle(fontSize: 22)),
+                    const Text("  Cultivation Tips", style: TextStyle(fontSize: 22)),
               ),
               Container(
-                height: 140,
+                height: 130,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       height: 110,
                       width: 100,
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 3,
-                              color: Color.fromARGB(255, 199, 198, 198)),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                              color: const Color.fromARGB(255, 199, 198, 198)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20))),
                       child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/potato.jpeg"),
                             fit: BoxFit.contain,
@@ -422,17 +444,17 @@ class frontpage1 extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       height: 110,
                       width: 100,
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 3,
-                              color: Color.fromARGB(255, 199, 198, 198)),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                              color: const Color.fromARGB(255, 199, 198, 198)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20))),
                       child: Container(
-                        padding: EdgeInsets.all(30),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(30),
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/crop2.jpeg"),
                             fit: BoxFit.cover,
@@ -441,32 +463,35 @@ class frontpage1 extends StatelessWidget {
                       ),
                     ),
                     Container(
+                      padding: const EdgeInsets.all(10),
+                      height: 110,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 3,
+                              color: const Color.fromARGB(255, 199, 198, 198)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20))),
                       child: Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/papaya.jpeg"),
                             fit: BoxFit.contain,
                           ),
                         ),
                       ),
-                      padding: EdgeInsets.all(10),
-                      height: 110,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 3,
-                              color: Color.fromARGB(255, 199, 198, 198)),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
                     InkWell(
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => cropList()));
+                                  builder: (context) => const cropList()));
                         },
-                        child: Icon(Icons.arrow_right)),
+                        child: const Icon(Icons.arrow_forward_ios,
+                        color: Colors.grey,
+                        )
+                        ),
                   ],
                 ),
               )

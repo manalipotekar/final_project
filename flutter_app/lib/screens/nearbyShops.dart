@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'nearbyShopsDetails.dart';
 
 Color green = const Color.fromRGBO(8, 129, 58, 1);
 
@@ -15,7 +14,7 @@ final List<String> entries = <String>['A', 'B', 'C'];
 final List<int> colorCodes = <int>[600, 500, 100];
 
 class _NearbyShopsState extends State<NearbyShops> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,7 +50,7 @@ class _NearbyShopsState extends State<NearbyShops> {
                         child: TextField(
                           controller: _searchController,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20, 14, 0, 10),
+                            contentPadding: const EdgeInsets.fromLTRB(20, 14, 0, 10),
                             hintText: 'Search',
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -79,8 +78,8 @@ class _NearbyShopsState extends State<NearbyShops> {
                 const SizedBox(
                   height: 6,
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     SizedBox(
                       width: 45,
                     ),
@@ -92,41 +91,41 @@ class _NearbyShopsState extends State<NearbyShops> {
                     ),
                   ],
                 ),
-                Divider(),
+                const Divider(),
                 ListOfNearbyShops(
                   title: "The Seed Store",
                   items: "Seeds, Fertilizers",
                   location: "Panaji Goa",
                   cardColor: Colors.grey.shade100,
-                  pic: 'assets/farmshop.png',
+                  pic: 'assets/dealer1.jpg',
                 ),
                 ListOfNearbyShops(
                   title: "Ashish Agro Store",
                   items: "Seeds, Farming tools",
                   location: "Panaji Goa",
                   cardColor: Colors.yellow.shade100,
-                  pic: 'assets/farmshop.png',
+                  pic: 'assets/dealer2.jpg',
                 ),
                 ListOfNearbyShops(
                   title: "Farm Products",
                   items: "Seeds, Bio Stimulators",
                   location: "Panaji Goa",
                   cardColor: Colors.blue.shade100,
-                  pic: 'assets/farmshop.png',
+                  pic: 'assets/dealer3.jpg',
                 ),
                 ListOfNearbyShops(
                   title: "The Seed Store",
                   items: "Fertilizers",
                   location: "Panaji Goa",
                   cardColor: Colors.green.shade100,
-                  pic: 'assets/farmshop.png',
+                  pic: 'assets/dealer4.jpg',
                 ),
                 ListOfNearbyShops(
                   title: "The Seed Store",
                   items: "Fertilizers",
                   location: "Panaji Goa",
                   cardColor: Colors.green.shade100,
-                  pic: 'assets/farmshop.png',
+                  pic: 'assets/dealer5.jpg',
                 ),
               ],
             ),
@@ -162,7 +161,7 @@ class ListOfNearbyShops extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-              child: Container(
+              child: SizedBox(
                 height: 120,
                 width: 120,
                 child: Image.asset(

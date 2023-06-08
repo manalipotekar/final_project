@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/frontpage.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../reusuable_widgets/reusable_widget.dart';
-import '../utils/color_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -37,19 +33,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
   InputDecoration inputDec(String text, IconData icon) {
     return InputDecoration(
       labelText: text,    //label
-      border: OutlineInputBorder(),  //creates border for input feild
+      border: const OutlineInputBorder(),  //creates border for input feild
       prefixIcon: Icon(
         icon,
-        color: Color.fromARGB(118, 5, 88, 48),
+        color: const Color.fromARGB(118, 5, 88, 48),
       ),
       labelStyle:
-          TextStyle(color: Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)), 
+          TextStyle(color: const Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)), 
       filled: true,  //this is true if hovered or border is focused
       floatingLabelBehavior: FloatingLabelBehavior.never,  // the label will always float at the top of the field above the content.
-      fillColor: Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),   //colr of input container
-      focusedErrorBorder: new OutlineInputBorder(   //focused and error text is not null
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      fillColor: const Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),   //colr of input container
+      focusedErrorBorder: OutlineInputBorder(   //focused and error text is not null
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
       enabledBorder: OutlineInputBorder(  //not focused border
           borderRadius: BorderRadius.circular(30.0),
@@ -57,21 +53,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: 3, color: Color.fromARGB(118, 5, 88, 48))
               
               ),
-      focusedBorder: new OutlineInputBorder(  //displayed when InputDecorator.isFocused is true and
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      focusedBorder: OutlineInputBorder(  //displayed when InputDecorator.isFocused is true and
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
-      errorBorder: new OutlineInputBorder(  //when error text is not null
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      errorBorder: OutlineInputBorder(  //when error text is not null
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
     );
   }
 
 
-  TextEditingController _passwordTextController = TextEditingController();  //initialization of variable for text feild
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();  //initialization of variable for text feild
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();   //Create a Form with a GlobalKey
   @override
   Widget build(BuildContext context) {
@@ -98,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           child: SingleChildScrollView(   //allows us to scroll, provides its children with an infinite amount of space.
               child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 120, 20, 10), 
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 10), 
             child: Form(
                 key: formKey,
                 autovalidateMode: AutovalidateMode.always,  //validate as we enter characters
@@ -129,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                       controller: _userNameTextController,  //value of field
-                      style: TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
+                      style: const TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
                       decoration: inputDec("Name", Icons.person),  //call inputDec() method
                       validator: MultiValidator([   //validation for Name
                         RequiredValidator(errorText: "Required"),
@@ -141,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                         controller: _emailTextController,
-                        style: TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
+                        style: const TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
                         decoration: inputDec("Email", Icons.email),
                         validator: MultiValidator([                          
                           RequiredValidator(errorText: "Required"),
@@ -153,7 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextFormField(
                       controller: _passwordTextController,
                       obscureText: true,
-                      style: TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
+                      style: const TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
                       decoration: inputDec("Password", Icons.key),
                       validator: MultiValidator([
                         RequiredValidator(errorText: "Required"),
@@ -182,7 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(   //To switch to new screen
                             context,
                             MaterialPageRoute(  //route to next page
-                                builder: (context) => frontPage()));
+                                builder: (context) => const frontPage()));
                       }).onError((error, stackTrace) {
                         print("Error ${error.toString()}");  //if error the display on debug console
                       });
@@ -215,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         GestureDetector(  //detecting the user’s gesture.
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignInScreen()));
+                MaterialPageRoute(builder: (context) => const SignInScreen()));
           },
           child: const Text(
             " Sign In",

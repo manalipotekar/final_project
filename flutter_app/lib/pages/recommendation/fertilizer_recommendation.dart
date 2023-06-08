@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../frontpage.dart';
 import 'function.dart';
 
 class Fertilizer_Recommendation2 extends StatefulWidget {
@@ -54,11 +53,11 @@ class _Fertilizer_Recommendation2State
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Fertilizer Recommendation",
         ),
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 96, 212, 100),
+        backgroundColor: const Color.fromARGB(255, 96, 212, 100),
         toolbarHeight: 70,
       ),
       body: SingleChildScrollView(
@@ -80,10 +79,10 @@ class _Fertilizer_Recommendation2State
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                         onChanged: (value) {
                           n = value;
@@ -93,7 +92,7 @@ class _Fertilizer_Recommendation2State
                           border: InputBorder.none,
                         ),
                         // controller: n,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -105,10 +104,10 @@ class _Fertilizer_Recommendation2State
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                         onChanged: (value) {
                           p = value;
@@ -118,7 +117,7 @@ class _Fertilizer_Recommendation2State
                           border: InputBorder.none,
                         ),
                         // controller: p,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -130,10 +129,10 @@ class _Fertilizer_Recommendation2State
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                         onChanged: (value) {
                           k = value;
@@ -143,7 +142,7 @@ class _Fertilizer_Recommendation2State
                           border: InputBorder.none,
                         ),
                         // controller: k,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -158,17 +157,17 @@ class _Fertilizer_Recommendation2State
                   children: [
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Temperature ",
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                             onChanged: (value) {
                               temperature = value;
@@ -178,7 +177,7 @@ class _Fertilizer_Recommendation2State
                               border: InputBorder.none,
                             ),
                             // controller: temperature,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
@@ -187,17 +186,17 @@ class _Fertilizer_Recommendation2State
                     ),
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Humidity ",
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                             onChanged: (value) {
                               humidity = value;
@@ -207,7 +206,7 @@ class _Fertilizer_Recommendation2State
                               border: InputBorder.none,
                             ),
                             // controller: rainfall,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
@@ -226,22 +225,22 @@ class _Fertilizer_Recommendation2State
                       crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        Text(
+                        const Text(
                           "Crop ",
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           height: 40,
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               border: Border.all(
                                   width: 3,
-                                  color: Color.fromARGB(255, 86, 86, 86)),
+                                  color: const Color.fromARGB(255, 86, 86, 86)),
                               borderRadius: BorderRadius.circular(10),
-                              color: Color.fromARGB(255, 252, 244, 235)),
+                              color: const Color.fromARGB(255, 252, 244, 235)),
                           child: DropdownButton(
                             isExpanded: true,
                             underline: Container(
@@ -295,15 +294,15 @@ class _Fertilizer_Recommendation2State
                         ),
      Container(
                           height: 40,
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               border: Border.all(
                                   width: 3,
-                                  color: Color.fromARGB(255, 86, 86, 86)),
+                                  color: const Color.fromARGB(255, 86, 86, 86)),
                               borderRadius: BorderRadius.circular(10),
-                              color: Color.fromARGB(255, 252, 244, 235)),
+                              color: const Color.fromARGB(255, 252, 244, 235)),
                           child: DropdownButton(
                             isExpanded: true,
                             underline: Container(
@@ -370,7 +369,7 @@ class _Fertilizer_Recommendation2State
                     ),
                   ],
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Container(
                     width: 190,
                     height: 45,
@@ -379,7 +378,7 @@ class _Fertilizer_Recommendation2State
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                       ),
@@ -387,20 +386,7 @@ class _Fertilizer_Recommendation2State
                         String nit = n.toString();
                         String phros = p.toString();
                         // url = 'http://10.0.2.2:5000/api/fertilizer?n='+n.toString()+'&p='+p.toString()+'&k='+k.toString()+'&temp='+temperature.toString()+'&humidity='+humidity.toString()+'&crop='+crop.toString()+'&soil='+soil.toString();
-                        url = 'http://10.0.2.2:5000/api/fertilizer?query=' +
-                            nit.toString() +
-                            '&q2=' +
-                            phros.toString() +
-                            '&k=' +
-                            k.toString() +
-                            '&temp=' +
-                            temperature.toString() +
-                            '&humidity=' +
-                            humidity.toString() +
-                            '&crop=' +
-                            crop.toString() +
-                            '&soil=' +
-                            soil.toString();
+                        url = 'http://10.0.2.2:5000/api/fertilizer?query=$nit&q2=$phros&k=$k&temp=$temperature&humidity=$humidity&crop=$crop&soil=$soil';
 
                         data = await fetchdata(url);
                         var decoded = jsonDecode(data);
@@ -409,11 +395,10 @@ class _Fertilizer_Recommendation2State
                           // url='';
                         });
                       },
-                      child: Text("Predict"),
+                      child: const Text("Predict"),
                     )),
-                Text("You may use "+
-                  output.toString()+" as fertilizer",
-                  style: TextStyle(fontSize: 40, color: Colors.green),
+                Text("You may use $output as fertilizer",
+                  style: const TextStyle(fontSize: 40, color: Colors.green),
                 ),
  
               ],

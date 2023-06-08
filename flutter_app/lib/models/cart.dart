@@ -12,7 +12,7 @@ class Cart extends Product{
   Cart(
     String title,double price,String id,String description,
     String image,String category,this.count
-  ):super(title,price,id,description,image,category);
+  ):super(title,price,id,description,image,category,);
 
   factory Cart.fromJson(Map<String,dynamic> json)=> _$CartFromJson(json);
 

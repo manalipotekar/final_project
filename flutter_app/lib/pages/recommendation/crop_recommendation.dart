@@ -18,7 +18,14 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
   TextEditingController soil = TextEditingController();
    String url = '';
   var data;
+    // final op1=useState('');
     String output = '';
+    String output1='';
+    String output2='';
+    String output3='';
+    String output4='';
+
+
     String n='';
     String p='';
     String k='';
@@ -31,11 +38,11 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text(
+            title: const Text(
               "Crop Recommendation",
             ),
             foregroundColor: Colors.white,
-            backgroundColor: Color.fromARGB(255, 96, 212, 100),
+            backgroundColor: const Color.fromARGB(255, 96, 212, 100),
             toolbarHeight: 70,
           ),
       body: SingleChildScrollView(
@@ -56,10 +63,10 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                         onChanged: (value) {
                           n=value;
@@ -69,7 +76,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                           border: InputBorder.none,
                         ),
                         // controller: n,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -81,10 +88,10 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                         onChanged: (value) {
                           p=value;
@@ -94,7 +101,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                           border: InputBorder.none,
                         ),
                         // controller: p,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -105,10 +112,10 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     ),
                     Container(
                       width: 50,
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(255, 250, 232, 208)),
+                          color: const Color.fromARGB(255, 250, 232, 208)),
                       child: TextFormField(
                             onChanged: (value) {
                           k=value;
@@ -118,7 +125,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                           border: InputBorder.none,
                         ),
                         // controller: k,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                         ),
                       ),
@@ -133,17 +140,17 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                   children: [
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Temperature ",
                           style:
                               TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                                 onChanged: (value) {
                           temperature=value;
@@ -153,7 +160,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                               border: InputBorder.none,
                             ),
                             // controller: temperature,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
@@ -162,17 +169,17 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     ),
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Rainfall ",
                           style:
                               TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                                 onChanged: (value) {
                           rainfall=value;
@@ -182,7 +189,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                               border: InputBorder.none,
                             ),
                             // controller: rainfall,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
@@ -199,17 +206,17 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                   children: [
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Humidity ",
                           style:
                               TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                                 onChanged: (value) {
                           humidity=value;
@@ -219,7 +226,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                               border: InputBorder.none,
                             ),
                             // controller: humidity,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
@@ -235,10 +242,10 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                         ),
                         Container(
                           width: 150,
-                          margin: EdgeInsets.only(top: 10, right: 10),
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color.fromARGB(255, 250, 232, 208)),
+                              color: const Color.fromARGB(255, 250, 232, 208)),
                           child: TextFormField(
                                 onChanged: (value) {
                           pH=value;
@@ -257,7 +264,7 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
       
       
                 Container(
@@ -266,10 +273,11 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25)
                   ),
+                    margin: const EdgeInsets.all(4),
                   child: ElevatedButton(
            style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all( 
                       Radius.circular(20)
                   )
@@ -280,24 +288,26 @@ class _FertilizerScreenState extends State<FertilizerScreen> {
                       String nit=n.toString();
                       String phros=p.toString();
                       // String k1=k.toString();
-      url = 'http://10.0.2.2:5000/api?query=' + nit.toString()+'&q2='+phros.toString()+'&k='+k.toString()+'&temp='+temperature.toString()+'&humidity='+humidity.toString()+'&rainfall='+rainfall.toString()+'&pH='+pH.toString();
+      url = 'http://10.0.2.2:5000/api?query=$nit&q2=$phros&k=$k&temp=$temperature&humidity=$humidity&rainfall=$rainfall&pH=$pH';
                     
                     data = await fetchdata(url);
                     var decoded = jsonDecode(data);
                     setState(() {
-                       output = decoded['output'];
+                       output = decoded['output'][2];
+                       output1 = decoded['output'][0];
+                        output2 = decoded['output'][1];
+                         output3 = decoded['output'][2];
+                          output4 = decoded['output'][3];
 
                       // url='';
                     });
       
-                    }, child: Text("Predict"),
+                    }, child: const Text("Predict"),
                     
                     ),
-                    margin: EdgeInsets.all(4),
                     ),
-                    Text("You may grow " +
-                output.toString() ,
-                style: TextStyle(fontSize: 40, color: Colors.green),
+                    Text("You may grow $output1, $output2, $output3, $output4" ,
+                style: const TextStyle(fontSize: 40, color: Colors.green),
               ),
               ],
             ),

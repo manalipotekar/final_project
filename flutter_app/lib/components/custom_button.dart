@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/loader.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
@@ -21,7 +18,7 @@ const CustomButton({Key?key, required this.text,this.loading=false,required this
           borderRadius: BorderRadius.circular(35), color:CustomTheme.green),
       child: MaterialButton(
           onPressed: loading ? null : onPress,
-          child: loading ?const loader() : Text(text,style: TextStyle(color: Colors.white),)),
+          child: loading ?const loader() : Text(text,style: const TextStyle(color: Colors.white),)),
     );
   }
 }

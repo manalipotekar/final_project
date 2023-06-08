@@ -1,9 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/models/product.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
 
@@ -21,10 +17,10 @@ class GridCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: index % 2 == 0 ? EdgeInsets.all(5) : EdgeInsets.all(5),
+      margin: index % 2 == 0 ? const EdgeInsets.all(5) : const EdgeInsets.all(5),
       decoration: CustomTheme.getCardDecoration(),
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           
             // border: Border.all(),
             borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -38,7 +34,7 @@ class GridCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               child: Column(children: [
                 Container(
-                  padding: EdgeInsets.only(top: 10,right: 10,left:10),
+                  padding: const EdgeInsets.only(top: 10,right: 10,left:10),
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                           colors: [
@@ -67,7 +63,7 @@ class GridCard extends StatelessWidget {
                         )
                         ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     //  gradient: LinearGradient(
                     //       colors: [
                     //         Color.fromARGB(255, 177, 236, 179),
@@ -80,16 +76,16 @@ class GridCard extends StatelessWidget {
                     height: 70,
                     // decoration: BoxDecoration(border: Border.all()),
                     child: Container(
-                      padding: EdgeInsets.all(18),
+                      padding: const EdgeInsets.all(18),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(vertical: 4),
                             child: Text(
                               product.title,
                              
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 20),
                             ),
                           ),
@@ -99,7 +95,7 @@ class GridCard extends StatelessWidget {
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStatePropertyAll<Color>(
+                                        const MaterialStatePropertyAll<Color>(
                                             Colors.green),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
@@ -107,8 +103,7 @@ class GridCard extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(25.0),
                                     ))),
                                 onPressed: () {},
-                                child: Text( "Rs: "+
-                                  product.price.toString(),
+                                child: Text( "Rs: ${product.price}",
                                 )),
                           )
                         ],

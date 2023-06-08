@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_admin/testing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/custom_button.dart';
 import 'package:provider/provider.dart';
 
@@ -29,22 +26,22 @@ class _UserDetailAddState extends State<UserDetailAdd> {
   TextEditingController address=TextEditingController(text: "");
   String Address="";
 String phoneNumber = "1234567890";  // Example phone number
-TextEditingController _phoneNumberController = TextEditingController(text: phoneNumber);
+TextEditingController phoneNumberController = TextEditingController(text: phoneNumber);
 String verificationCode = "123456"; // Example verification code
 
 
     return Scaffold(
        appBar: AppBar(
-            title: Text(
+            title: const Text(
               "AGRICROP",
             ),
             foregroundColor: Colors.white,
-            backgroundColor: Color.fromARGB(255, 96, 212, 100),
+            backgroundColor: const Color.fromARGB(255, 96, 212, 100),
             toolbarHeight: 70,
           ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Form(
             key: _formKey1,
             child: ListView(
@@ -59,33 +56,39 @@ String verificationCode = "123456"; // Example verification code
 
                 
                 keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                   ),
               ),
               TextFormField(
+                initialValue: "Porvorim Goa",
+                
                 onChanged: (value) {
                   Address=value;
                 print(Address);
                 },
                 keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Address Line 1',
                   ),
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Address Line 2',
                   ),
               ),
               TextFormField(
+                initialValue: "403521",
+
                 keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Pin Code',
                   ),
               ),
               TextFormField(
+                initialValue: "7668656556",
+
                 keyboardType: TextInputType.number,
                 // controller: _phoneNumberController,
                onChanged: (value) {
@@ -93,11 +96,11 @@ String verificationCode = "123456"; // Example verification code
     
   },
                 
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Phone Number',
                   ),
               ),
-              SizedBox(height: 100,),
+              const SizedBox(height: 100,),
               CustomButton(text: "Update", onPress: (){ 
                 updateUser(name: displayName, address: Address, Id: id);
               })

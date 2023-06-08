@@ -1,14 +1,23 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/controllers/product.dart';
 import 'package:flutter_app/reusuable_widgets/commanDialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:flutter_app/screens/crop_screen.dart';
+import 'package:flutter_app/screens/fertilizer_screen.dart';
+import 'package:flutter_app/pages/my_community.dart';
+import 'package:flutter_app/screens/signin_screen.dart';
+// import 'package:flutter_app/screens/signup_screen.dart';
 import 'package:flutter_app/screens/storage_service.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import '../utils/application_state.dart';
 
@@ -25,8 +34,9 @@ Future<void> getLoginUserProduct() async {
         // .where('user_Id', isEqualTo: authController.userId)
         .get();
 
-    if (response.docs.isNotEmpty) {
-      for (var result in response.docs) {
+    if (response.docs.length > 0) {
+      response.docs.forEach(
+        (result) {
           print(result.data());
           print("Product ID  ${result.id}");
           lodadedProduct.add(
@@ -39,7 +49,8 @@ Future<void> getLoginUserProduct() async {
                 phonenumber: int.parse(result['phone_number']),
                 productuploaddate: result['product_upload_date'].toString()),
           );
-        }
+        },
+      );
     }
     loginUserData.addAll(lodadedProduct);
     // update();
@@ -54,29 +65,27 @@ Future<void> getLoginUserProduct() async {
   }
 }
 
-class AddProductScreen extends StatefulWidget {
-  const AddProductScreen({super.key});
+class AddPostScreen extends StatefulWidget {
+  const AddPostScreen({super.key});
 
   @override
-  State<AddProductScreen> createState() => _AddProductScreenState();
+  State<AddPostScreen> createState() => _AddPostScreenState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class _AddPostScreenState extends State<AddPostScreen> {
   var _userImageFile;
   final _formKey = GlobalKey<FormState>();
 // SignUpScreen s=Get.find();
 
-
   Map<String, dynamic> productData = {
-    "p_name": "",
+    "title": "",
+    "description":"",
+    'username':"",
     "p_price": "",
     "p_upload_date": DateTime.now().millisecondsSinceEpoch,
-    "phone_number": 0,
+    "phone_number": "",
     "product_image": "",
     "user_Id": "",
-    "category":"fruits",
-    "p_description":"This is product",
-    "id":DateTime.now().millisecondsSinceEpoch,
   };
 
   void _pickedImage(File image) {
@@ -107,22 +116,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
     print("Updated $response");
     var imageUrl = await ref.getDownloadURL();
 
-
-
     try {
       // CommanDialog.showLoading();
 
       var response =
-          await FirebaseFirestore.instance.collection('product').add({
-        'title': productdata['p_name'],
-        'price': productdata['p_price'] ,
+          await FirebaseFirestore.instance.collection('productlist').add({
+        'title': productdata['title'],
+        'description': productdata['description'],
+        'username':productdata['username'],
+        'product_price': productdata['p_price'],
         "product_upload_date": productdata['p_upload_date'],
-        'image': imageUrl,
-        'user_Id':   productData['user_Id'],
+        'product_image': imageUrl,
+        // 'user_Id':   s,
         "phone_number": productdata['phone_number'],
-        "category": productData['category'],
-        "description": productData['p_description'],
-        "id":DateTime.now().millisecondsSinceEpoch.toString(),
       });
       print("Firebase response1111 $response");
       // CommanDialog.hideLoading();
@@ -136,74 +142,57 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-   User user=Provider.of<ApplicationState>(context, listen: false).user!;
-   String id=user.uid.toString();
+  User user1=Provider.of<ApplicationState>(context, listen: false).user!;
+
 
     return Scaffold(
       
-      backgroundColor: const Color.fromARGB(255, 252, 238, 196),
+      backgroundColor: Color.fromARGB(255, 252, 238, 196),
       appBar: AppBar(
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
-        title: const Text('Add Your Product'),
+        title: Text('Add New Post'),
       ),
       body: Card(
         
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           child: Form(
             key: _formKey,
             child: ListView(
               shrinkWrap: true,
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                  
                     // labelText: 'Product Name',
                     labelText: 'Title',labelStyle: TextStyle(color: Colors.grey,),
                   ),
                   onSaved: (value) {
-                    productData['p_name'] = value;
-                    productData['user_Id']=id;
+                    productData['title'] = value;
                   },
                 ),
    TextFormField(
-      onSaved: (value) {
-                    productData['p_description'] = value;
-                  },
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                 
+                  decoration: InputDecoration(
                     // labelText: 'Product Name',
                     labelText: 'Description',labelStyle: TextStyle(color: Colors.grey,),
                   ),
-              
-                ),
-  TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    labelText: 'Category',labelStyle: TextStyle(color: Colors.grey,),
-                  ),
                   onSaved: (value) {
-                    productData['category'] = value;
-                    
+                    productData['description'] = value;
+                    productData['username'] = user1.displayName;
                   },
+                  // onSaved: (value) {
+                  //   productData['p_name'] = value;
+                  // },
                 ),
-  TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    labelText: 'Price',labelStyle: TextStyle(color: Colors.grey,),
-                  ),
-                  onSaved: (value) {
-                    productData['p_price'] = int.parse(value!) ;
-                    
-                  },
-                ),
+
+
 
                 // TextFormField(
                 //   keyboardType: TextInputType.number,
@@ -226,22 +215,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 //   },
                 // ),
 
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
                 ProductImagePicker(_pickedImage),
 
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
                 ElevatedButton(
-                  style: const ButtonStyle(
+                  style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(Colors.green),
                       foregroundColor:
                           MaterialStatePropertyAll<Color>(Colors.white)),
                   onPressed: addProduct,
-                  child: const Text('Submit'),
+                  child: Text('Submit'),
                 ),
               ],
             ),

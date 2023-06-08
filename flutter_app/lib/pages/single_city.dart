@@ -65,7 +65,7 @@ launchMap(lat ,lng) {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 148, 189, 91),
+        backgroundColor: const Color.fromARGB(255, 148, 189, 91),
         foregroundColor: Colors.white,
         title: Text('About ${widget.cityData['name']}')),
       body: Column(

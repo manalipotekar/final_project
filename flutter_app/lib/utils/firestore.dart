@@ -1,13 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_app/models/product.dart';
 import 'package:flutter_app/models/cart.dart';
-import '../models/cart.dart';
 
 class FirestoreUtil {
   static const String productCollection = 'product';
@@ -21,7 +17,6 @@ class FirestoreUtil {
     try {
       final productRef = FirebaseFirestore.instance
           .collection(productCollection)
-
           .withConverter<Product>(
               fromFirestore: (snapshot, _) =>
                   Product.fromJson(snapshot.data()!),
@@ -130,39 +125,66 @@ class FirestoreUtil {
   }
 
   static createOrder(User? user) async {
-
-   List<Cart> cart=await FirestoreUtil.getCart(user);
+    List<Cart> cart = await FirestoreUtil.getCart(user);
 
     List<Cart> orders = [];
-    
-    orders=cart;
-    
+
     final docCart = FirebaseFirestore.instance.collection('orders');
-   
- dynamic id =user?.uid;
- dynamic username =user?.displayName;
+    orders = cart;
 
+    var product_id;
+    final productCollection = FirebaseFirestore.instance.collection('product');
 
-  
+    dynamic id = user?.uid;
+    dynamic username = user?.displayName;
+    print("this is order lenght");
+    print(orders[0].count);
 
- try{
-  for (int i = 0; i < orders.length; i++) {
-        final  cart = Cart(orders[i].title,orders[i].price,id, orders[i].description, orders[i].image, orders[i].category, orders[i].count);
-        final json =cart.toJson();
-           docCart.add(json,).then((value) => value.update({"username": username}));
-          //  docCart.add({"username": "shela"});
-  }
- }on FirebaseException catch (e, stacktrace) {
+    try {
+      for (int i = 0; i < orders.length; i++) {
+        //for updating stock
+        var productsInCart = await productCollection
+            .where("title", isEqualTo: orders[i].title)
+            .get();
+        productsInCart.docs.forEach((DocumentSnapshot document) {
+          String documentId = document.id;
+
+          product_id = documentId;
+        });
+
+        var getproduct = await productCollection.doc(product_id).get();
+        Map<String, dynamic>? data = getproduct.data();
+
+        int stock = data!['stock'];
+
+        stock = stock - orders[i].count;
+
+        print("order placed");
+        var product = await productCollection
+            .doc(product_id)
+            .update({'stock': stock}).then(
+          (value) => print("stock updated of $stock "),
+        );
+
+        //for adding items from cart to orders
+        final cart = Cart(
+            orders[i].title,
+            orders[i].price,
+            id,
+            orders[i].description,
+            orders[i].image,
+            orders[i].category,
+            orders[i].count);
+        final json = cart.toJson();
+        docCart.add(json).then((value) => value.update({"username": username}));
+      }
+    } on FirebaseException catch (e, stacktrace) {
       print("error");
       log("Error adding to orders", stackTrace: stacktrace, error: e);
     }
 
-
-
-
-  
-  try {
-    final cartRef = await FirebaseFirestore.instance
+    try {
+      final cartRef = await FirebaseFirestore.instance
           .collection(customerCollection)
           .doc(user?.uid)
           .collection(cartCollection)
@@ -173,35 +195,25 @@ class FirestoreUtil {
         productIds.add(element['id']);
       }
 
-
-  List<Product> products = await getProducts(productIds);
+      List<Product> products = await getProducts(productIds);
       for (var element in cartRef.docs) {
         Product product = products.firstWhere((prod) => prod.id == element.id);
 
-          final cartDeleteRef = await FirebaseFirestore.instance
-          .collection(customerCollection)
-          .doc(user?.uid).collection(cartCollection).doc(product.id).delete().then(
-      (doc) => print("Document deleted"),
-      onError: (e) => print("Error updating document $e"),
-    
-
-    );
-       
-
+        final cartDeleteRef = await FirebaseFirestore.instance
+            .collection(customerCollection)
+            .doc(user?.uid)
+            .collection(cartCollection)
+            .doc(product.id)
+            .delete()
+            .then(
+              (doc) => print("Document deleted"),
+              onError: (e) => print("Error updating document $e"),
+            );
       }
-     
     } on FirebaseException catch (e, stacktrace) {
       log("Error deleting to cart", stackTrace: stacktrace, error: e);
     }
-
-
   }
-
-  
-  
-
-
-
 
   static Future<List<Cart>> getCart(User? user) async {
     List<Cart> carts = [];
@@ -213,8 +225,8 @@ class FirestoreUtil {
           .doc(user?.uid)
           .collection(cartCollection)
           .get();
-      
-      if(cartRef.size==0){
+
+      if (cartRef.size == 0) {
         print("object empty");
         return carts;
       }
@@ -234,15 +246,13 @@ class FirestoreUtil {
       log("Error getting  cart", stackTrace: stacktrace, error: e);
     }
     // ignore: prefer_interpolation_to_compose_strings
-    print(orders.map((e) => e.title as String));
+    print(orders.map((e) => e.title));
 
     final docCart = FirebaseFirestore.instance.collection('orders');
-   
- dynamic id =user?.uid;
-   
 
- print(orders[0].title);
+    dynamic id = user?.uid;
 
+    print(orders[0].title);
 
     return carts;
   }
@@ -254,4 +264,8 @@ class FirestoreUtil {
     }
     return total;
   }
+
+
+
+
 }

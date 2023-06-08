@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/checkout.dart';
 import 'package:flutter_app/pages/frontpage.dart';
 import 'package:flutter_app/pages/home.dart';
-import 'package:flutter_app/pages/login.dart';
 import 'package:flutter_app/pages/profile.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
-import 'package:get/get.dart';
 import 'package:flutter_app/utils/application_state.dart';
 import 'package:provider/provider.dart';
 // import 'firebase_options.dart';
@@ -29,16 +27,16 @@ void main() async {
         switch (applicationState.loginState) {
           case AplicationLoginState.loggedOut:
             print(AplicationLoginState.loggedOut);
-            child = SignInScreen();
+            child = const SignInScreen();
             break;
           case AplicationLoginState.loggedIn:
             print(AplicationLoginState.loggedIn);
-            child = frontPage();
+            child = const frontPage();
 
             break;
           default:
             // print(AplicationLoginState.loggedIn);
-            child = SignInScreen();
+            child = const SignInScreen();
         }
 
         print(child);
@@ -76,7 +74,7 @@ class MyApp extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           
-          title: Text("SHOPPERS"),
+          title: const Text("SHOPPERS"),
         ),
         bottomNavigationBar: Container(
             child: const TabBar(

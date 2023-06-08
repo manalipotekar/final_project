@@ -28,18 +28,18 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     cursorColor: Colors.white,
-    style: TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
+    style: const TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
-        color: Color.fromARGB(118, 5, 88, 48),
+        color: const Color.fromARGB(118, 5, 88, 48),
       ),
       labelText: text,
       labelStyle:
-          TextStyle(color: Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)),
+          TextStyle(color: const Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
+      fillColor: const Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
       //  border:OutlineInputBorder(borderRadius: BorderRadius.circular(30.0),
       //  borderSide: BorderSide(width: 3, color: Color.fromARGB(255, 241, 8, 8)),
       //  )
@@ -47,9 +47,9 @@ TextFormField reusableTextField(String text, IconData icon, bool isPasswordType,
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(
               width: 3, color: Color.fromARGB(118, 5, 88, 48))),
-      focusedBorder: new OutlineInputBorder(
-        borderRadius: new BorderRadius.circular(25.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
     ),
     keyboardType: isPasswordType
@@ -69,20 +69,20 @@ Container signInSignUpButton(
       onPressed: () {
         onTap();
       },
-      child: Text(
-        isLogin ? 'LOGIN' : 'SIGNUP',
-        style: const TextStyle(
-            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
               return Colors.black26;
             }
-            return Color.fromARGB(151, 7, 143, 77);
+            return const Color.fromARGB(151, 7, 143, 77);
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      child: Text(
+        isLogin ? 'LOGIN' : 'SIGNUP',
+        style: const TextStyle(
+            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
     ),
   );
 }

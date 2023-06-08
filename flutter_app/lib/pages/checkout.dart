@@ -1,15 +1,12 @@
-import 'dart:developer';
 import 'dart:async';
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/custom_button.dart';
 import 'package:flutter_app/components/list_card.dart';
 import 'package:flutter_app/components/loader.dart';
 import 'package:flutter_app/models/cart.dart';
+import 'package:flutter_app/pages/product.dart';
 import 'package:flutter_app/utils/application_state.dart';
 import 'package:flutter_app/utils/common.dart';
 import 'package:flutter_app/utils/custom_theme.dart';
@@ -73,6 +70,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.green,
+                 leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () { 
+            
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => frontPage(),
+              ),
+            );
+          },
+        ),
+
               ),
               body: SingleChildScrollView(
                 child: Column(
@@ -81,8 +91,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         itemCount: snapshot.data!.length,
                         itemBuilder: ((context, index) {
                           return ListCard(cart: snapshot.data![index]);
@@ -103,8 +113,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text('Confirmation'),
-                                content: Text('Your Order has been confirmed'),
+                                title: const Text('Confirmation'),
+                                content: const Text('Your Order has been confirmed'),
                                 actions: <Widget>[
                                   ElevatedButton(
                                     onPressed: () {
@@ -114,9 +124,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           MaterialPageRoute(
                                               //route to next page
                                               builder: (context) =>
-                                                  frontPage()));
+                                                  const frontPage()));
                                     },
-                                    child: Text('Back'),
+                                    child: const Text('Back'),
                                   ),
                                 ],
                               );
@@ -133,8 +143,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         loading: _checkoutButtonLoading,
                       ),
                     ),
-                    Text("  Your Orders  ",
-                        style: Theme.of(context).textTheme.headlineSmall),
+              
                   ],
                 ),
               ),
@@ -148,7 +157,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             );
           } else {
-            return Center(
+            return const Center(
               child: loader(),
             );
           }
@@ -159,7 +168,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   priceFooter(List<Cart> carts) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -178,7 +187,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 const Spacer(),
                 Text(
-                  "Rs" + FirestoreUtil.getCartTotal(carts).toString(),
+                  "Rs${FirestoreUtil.getCartTotal(carts)}",
                   style: Theme.of(context).textTheme.headlineSmall,
                 )
               ],

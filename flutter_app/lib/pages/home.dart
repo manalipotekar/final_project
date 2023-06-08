@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/grid_card.dart';
 import 'package:flutter_app/components/loader.dart';
 import 'package:flutter_app/models/product.dart';
-import 'package:flutter_app/pages/login.dart';
 import 'package:flutter_app/pages/product.dart';
 import 'package:flutter_app/utils/firestore.dart';
 
@@ -44,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Container(
-                      margin:EdgeInsets.all(10),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: Color.fromARGB(255, 230, 230, 230),
+                      margin:const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: const Color.fromARGB(255, 230, 230, 230),
                       // border: Border.all()
                       ),
             //           child: TextFormField(
@@ -88,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           else{
-            return Center(child: loader());
+            return const Center(child: loader());
           }
         });
     // Container(

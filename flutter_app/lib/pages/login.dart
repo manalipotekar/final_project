@@ -3,13 +3,10 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/custom_button.dart';
 import 'package:flutter_app/components/custom_text_input.dart';
 import 'package:flutter_app/utils/application_state.dart';
 import 'package:flutter_app/utils/common.dart';
-import 'package:flutter_app/utils/custom_theme.dart';
 import 'package:flutter_app/utils/login_data.dart';
 import 'package:provider/provider.dart';
 
@@ -21,10 +18,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _passwordTextController =
+  final TextEditingController _passwordTextController =
       TextEditingController(); //initialization of variable for text feild
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   bool _loading_button = false;
 
 
@@ -116,16 +113,16 @@ var img=data1["image"] as String;
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 70,
                       ),
                       Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Text(data1["heading"] as String,
-                              style: TextStyle(fontSize: 38,color:Color.fromARGB(118, 1, 96, 50)))),
+                              style: const TextStyle(fontSize: 38,color:Color.fromARGB(118, 1, 96, 50)))),
                       Text(
                         data1["subHeading"] as String,
-                        style: TextStyle(fontSize: 18,color: Colors.grey),
+                        style: const TextStyle(fontSize: 18,color: Colors.grey),
                       ),
                     ],
                   ),
@@ -139,7 +136,7 @@ var img=data1["image"] as String;
                       child: TextButton(
                         
                           onPressed: switchLogin,
-                          child: Text(data1['footer'] as String,style: TextStyle(color: Colors.grey),)),
+                          child: Text(data1['footer'] as String,style: const TextStyle(color: Colors.grey),)),
                     ),
                   ],
                 )

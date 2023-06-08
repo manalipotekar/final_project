@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 import '../utils/custom_theme.dart';
@@ -23,16 +21,16 @@ class CustomTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             
-            padding: EdgeInsets.only(left: 20, bottom: 8),
+            padding: const EdgeInsets.only(left: 20, bottom: 8),
             child:
-                Text(label, style: TextStyle( color:CustomTheme.green)),
+                Text(label, style: const TextStyle( color:CustomTheme.green)),
 
           ),
           SizedBox(
@@ -60,9 +58,9 @@ class CustomTextInput extends StatelessWidget {
                     borderSide: BorderSide(
                         width: 2, color: Color.fromARGB(118, 5, 88, 48))),
                 filled: true,
-                hintStyle: TextStyle(color: CustomTheme.grey),
+                hintStyle: const TextStyle(color: CustomTheme.grey),
                 hintText: placeholder,
-                fillColor: Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
+                fillColor: const Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
               ),
             ),
           )

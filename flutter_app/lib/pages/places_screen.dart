@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/single_city.dart';
 
@@ -94,7 +93,7 @@ class Places_Screen extends StatelessWidget {
                 //   fit: BoxFit.cover,
                 //   width: MediaQuery.of(context).size.width,
                 // ),
-                Text("data"),
+                const Text("data"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

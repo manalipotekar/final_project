@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/custom_button.dart';
 import 'package:flutter_app/utils/application_state.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +24,7 @@ void signOutButtonPressed(){
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.symmetric(horizontal:30),
+    return Padding(padding: const EdgeInsets.symmetric(horizontal:30),
     child: Column(
 
       mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +33,7 @@ void signOutButtonPressed(){
           child: StreamBuilder(
             stream: firestoreDB,
             builder: ((context, snapshot) {
-              if(!snapshot.hasData) return CircularProgressIndicator();
+              if(!snapshot.hasData) return const CircularProgressIndicator();
               return ListView.builder(
                 
                 shrinkWrap: true,
@@ -47,7 +44,7 @@ void signOutButtonPressed(){
             })),
         ),
 
-        Padding(padding: EdgeInsets.only(bottom: 20),
+        const Padding(padding: EdgeInsets.only(bottom: 20),
         child: Text("Hi there"),),
         CustomButton(text: "Sign out", onPress: signOutButtonPressed,loading:_loadingButton ,)
       ],

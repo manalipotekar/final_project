@@ -1,14 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_app/components/grid_card.dart';
 import 'package:flutter_app/components/loader.dart';
-import 'package:flutter_app/pages/home.dart';
 import 'package:flutter_app/screens/crop_screen.dart';
-import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
 
 import '../models/product.dart';
 import '../utils/firestore.dart';
@@ -47,11 +41,11 @@ class _ListItemsByCategoryState extends State<ListItemsByCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "AGRICROP",
           ),
           foregroundColor: Colors.white,
-          backgroundColor: Color.fromARGB(214, 96, 212, 100),
+          backgroundColor: const Color.fromARGB(214, 96, 212, 100),
           toolbarHeight: 70,
         ),
         body: Container(
@@ -59,9 +53,9 @@ class _ListItemsByCategoryState extends State<ListItemsByCategory> {
 
           child: Column(
             children: [
-              SizedBox(
-                child: Text("data"),
+              const SizedBox(
                 height: 100,
+                child: Text("data"),
               )
               
               ,
@@ -78,7 +72,7 @@ class _ListItemsByCategoryState extends State<ListItemsByCategory> {
                       padding: const EdgeInsets.all(8),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (BuildContext context, int index) {
-                        if (!snapshot.hasData) return CircularProgressIndicator();
+                        if (!snapshot.hasData) return const CircularProgressIndicator();
                         return Card(
                           color: Colors.white,
                           borderOnForeground: true,
@@ -91,23 +85,23 @@ class _ListItemsByCategoryState extends State<ListItemsByCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePageScreen()));
+                                          builder: (context) => const HomePageScreen()));
                                 },
                                 leading: 
                                 SizedBox(
                                   width: 120,
                                   child: CachedNetworkImage(imageUrl:snapshot.data!.docs[index]['image'])),
                                 title: Text(snapshot.data!.docs[index]['title'],
-                                    style: TextStyle(color: Colors.green)),
+                                    style: const TextStyle(color: Colors.green)),
                                 subtitle: Text(
                                   snapshot.data!.docs[index]['title'] ,
-                                  style: TextStyle(color: Colors.orangeAccent),
+                                  style: const TextStyle(color: Colors.orangeAccent),
                                 ),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 100,
                                   ),
                                   TextButton(
@@ -131,7 +125,7 @@ class _ListItemsByCategoryState extends State<ListItemsByCategory> {
                   }
                   
                   else{
-                  return Center(child: loader());
+                  return const Center(child: loader());
                 }
                   }
                   ),

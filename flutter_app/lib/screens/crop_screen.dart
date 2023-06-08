@@ -1,11 +1,6 @@
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_app/reusuable_widgets/reusable_widget.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -18,6 +13,8 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,24 +34,25 @@ String url='';
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
       borderSide:
-          BorderSide(width: 1.0, color: Colors.blue, style: BorderStyle.solid),
+          const BorderSide(width: 1.0, color: Colors.blue, style: BorderStyle.solid),
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     var url='';
     var data;
     String output="initial output";
     return Scaffold(
       
-      body: Container(
+      body: SizedBox(
 
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 200),
-            Container(
+            const SizedBox(height: 200),
+            SizedBox(
               width: 350,
               child: Form(
                 // key: _formkey,
@@ -69,11 +67,11 @@ String url='';
                   onSaved: (name1) {
                     name =
                         name1 as String; //getting data from the user form and assigning it to name
-                        print("mmmmmmmmmmmmmmmmmmmmmmmmmmmm"+name1);
+                        print("mmmmmmmmmmmmmmmmmmmmmmmmmmmm$name1");
                   },
                   onChanged: (name1){
-                    url='https://reqres.in/api/users?name1=' + name1.toString();
-                    print("\n---------------------------------------"+url);
+                    url='https://reqres.in/api/users?name1=$name1';
+                    print("\n---------------------------------------$url");
                     // url='http://10.0.2.2:5000/api?query=' + value.toString();
                   },
                 
@@ -91,7 +89,7 @@ String url='';
                 }
                 //sending a post request to the url
               },
-              child: Text('SEND'),
+              child: const Text('SEND'),
               // color: Colors.blue,
             ),
             TextButton(onPressed: () async{
@@ -109,7 +107,7 @@ String url='';
                 output=data.toString();
               });
 
-            },child: Text('Fetch ASCII value'),
+            },child: const Text('Fetch ASCII value'),
             ),
             Text(output),
 
@@ -137,12 +135,12 @@ String url='';
                 //   // console.log("hello");
                 // }
               },
-              child: Text('GET'),
+              child: const Text('GET'),
               // color: Colors.lightBlue,
             ),
             Text(
               name,
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             )
           ],
         ),

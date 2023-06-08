@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/components/grid_card.dart';
 import 'package:flutter_app/components/loader.dart';
 import 'package:flutter_app/models/product.dart';
-import 'package:flutter_app/pages/login.dart';
 import 'package:flutter_app/pages/product.dart';
 import 'package:flutter_app/utils/firestore.dart';
 
@@ -40,15 +37,21 @@ class _VegetablesScreenState extends State<VegetablesScreen> {
         builder: (context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             return Scaffold(
+                 appBar: AppBar(
+           title: const Text("",textAlign: TextAlign.start, style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,),),
+            foregroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 96, 212, 100),
+            toolbarHeight: 70,
+          ),
               
               body: Container(
 
                 child: Column(
                   children: [
                     Container(
-                      margin:EdgeInsets.all(10),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: Color.fromARGB(255, 230, 230, 230),
+                      margin:const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35),color: const Color.fromARGB(255, 230, 230, 230),
                       // border: Border.all()
                       ),
                       child: TextFormField(
@@ -88,7 +91,7 @@ class _VegetablesScreenState extends State<VegetablesScreen> {
             );
           }
           else{
-            return Center(child: loader());
+            return const Center(child: loader());
           }
         });
     // Container(

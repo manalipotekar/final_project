@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/controllers/product.dart';
-import 'package:flutter_app/pages/product.dart';
 import 'package:flutter_app/utils/common.dart';
-import 'package:flutter_app/utils/firestore.dart';
 
 enum AplicationLoginState { loggedOut, loggedIn }
 
@@ -50,7 +47,7 @@ class ApplicationState extends ChangeNotifier {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-          print("curr user "+ FirebaseAuth.instance.currentUser.toString());
+          print("curr user ${FirebaseAuth.instance.currentUser}");
           // print(FirebaseAuth.instance.userChanges());
 
       try {
@@ -62,7 +59,7 @@ class ApplicationState extends ChangeNotifier {
           notifyListeners();
        
       } catch (e) {
-        log("error1"+ e.toString());
+        log("error1$e");
       }
     } on FirebaseAuthException catch (e) {
       print(e.message);

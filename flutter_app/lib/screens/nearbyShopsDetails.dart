@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class NearByShopDetails extends StatelessWidget {
   const NearByShopDetails({super.key});
@@ -27,13 +25,13 @@ class NearByShopDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            padding: EdgeInsets.all(15),
-            margin: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.green.withOpacity(0.4),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("The Seed Store"),

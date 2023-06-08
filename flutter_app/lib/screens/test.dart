@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 
 Future Getdata(url)async{
   http.Response Response=await http.get(url);

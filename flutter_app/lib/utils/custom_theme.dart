@@ -31,7 +31,7 @@ return BoxDecoration(
 
     return ThemeData(
       primaryColor: yellow,
-      appBarTheme:AppBarTheme(
+      appBarTheme:const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         toolbarHeight: 70,

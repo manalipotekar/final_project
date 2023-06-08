@@ -12,8 +12,8 @@ class UploadPostScreen extends StatefulWidget {
 
 
 class _UploadPostScreenState extends State<UploadPostScreen> {
-  TextEditingController _title = TextEditingController();  //initialization of variable for text feild
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _title = TextEditingController();  //initialization of variable for text feild
+  final TextEditingController _emailTextController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();   //Create a Form with a GlobalKey
 
   final Storage storage=Storage();
@@ -36,7 +36,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
       body: Container(
           child: SingleChildScrollView(   //allows us to scroll, provides its children with an infinite amount of space.
                 child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 120, 20, 10), 
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 10), 
             child: Form(
                 key: formKey,
                 child:Column(
@@ -56,7 +56,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                               const SnackBar(content: Text("No file selected"),
                               ) 
                               );
-                              return null;
+                              return;
                           }
                           final filePath=results.files.single.path;
                           final fileName=results.files.single.name;
@@ -67,7 +67,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
 
                         },
                       
-                      child: Text("Upload image"))
+                      child: const Text("Upload image"))
                   ],
                 )
             )

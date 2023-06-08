@@ -28,11 +28,11 @@ class CommonUtil{
       return http.post(Uri.parse(apiUrl+ endPoint),headers: {
       "Accept":"application/json",
       "Content-Type":"application/json",
-      "Authorization":"Bearer " + token,
+      "Authorization":"Bearer $token",
     });
     } 
     catch(e){
-      print("backendcall err: "+ e.toString());
+      print("backendcall err: $e");
     }
   }
 
@@ -51,7 +51,7 @@ class CommonUtil{
       await Future.delayed(const Duration(seconds: 1));
       await Stripe.instance.presentPaymentSheet();
     }on StripeException catch(e){
-      log("Stripe error : "+e.error.message.toString());
+      log("Stripe error : ${e.error.message}");
       error=e.error.message.toString();
     }catch(e,stackTrace){
 log("Error with backend api call ",stackTrace: stackTrace,error: e);
@@ -66,7 +66,7 @@ error="Network error, try after some time";
       content: Text(body),
       actions: [
         TextButton(onPressed: ()=>Navigator.pop(context,'ok'
-        ), child: Text('Ok'))
+        ), child: const Text('Ok'))
       ],
     ));
   }

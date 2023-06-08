@@ -1,16 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app/pages/frontpage.dart';
-import 'package:flutter_app/screens/crop_screen.dart';
-import 'package:flutter_app/screens/fertilizer_screen.dart';
-import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/signup_screen.dart';
-import 'package:flutter_app/screens/upload_post.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../reusuable_widgets/reusable_widget.dart';
-import '../utils/color_utils.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -23,37 +16,37 @@ class _SignInScreenState extends State<SignInScreen> {
   InputDecoration inputDec(String text, IconData icon) {
     return InputDecoration(
       labelText: text,
-      border: OutlineInputBorder(),
+      border: const OutlineInputBorder(),
       prefixIcon: Icon(
         icon,
-        color: Color.fromARGB(118, 5, 88, 48),
+        color: const Color.fromARGB(118, 5, 88, 48),
       ),
       labelStyle:
-          TextStyle(color: Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)),
+          TextStyle(color: const Color.fromARGB(118, 5, 88, 48).withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
-      focusedErrorBorder: new OutlineInputBorder(
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      fillColor: const Color.fromARGB(255, 174, 232, 142).withOpacity(0.3),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(
               width: 3, color: Color.fromARGB(118, 5, 88, 48))),
-      focusedBorder: new OutlineInputBorder(
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
-      errorBorder: new OutlineInputBorder(
-        borderRadius: new BorderRadius.circular(30.0),
-        borderSide: BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(width: 3, color: Color.fromARGB(118, 5, 88, 48)),
       ),
     );
   }
 
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -101,7 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           TextFormField(
                               controller: _emailTextController,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromARGB(118, 5, 88, 48)),
                               decoration: inputDec("Email", Icons.email),
                               validator: MultiValidator([
@@ -116,14 +109,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: _passwordTextController,
                             obscureText: true,
                             style:
-                                TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
+                                const TextStyle(color: Color.fromARGB(118, 5, 88, 48)),
                             decoration: inputDec("Password", Icons.key),
                             validator: MultiValidator([
                               RequiredValidator(errorText: "Required"),
                               MinLengthValidator(7, errorText: "min 7")
                             ]),
                           ),
-                            SizedBox(
+                            const SizedBox(
                             height: 25,
                           ),
                           signInSignUpButton(context, true, () {
@@ -138,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => frontPage()));
+                                      builder: (context) => const frontPage()));
                             }).onError((error, stackTrace) {
                               print("Error ${error.toString()}");
                             });
@@ -161,7 +154,7 @@ class _SignInScreenState extends State<SignInScreen> {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignUpScreen()));
+                MaterialPageRoute(builder: (context) => const SignUpScreen()));
                 // MaterialPageRoute(builder: (context) => UploadPostScreen()));
 
           },

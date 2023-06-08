@@ -1,13 +1,8 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart' as firebase_core ;
-import 'package:flutter_app/screens/fertilizer_screen.dart';
-import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage ;
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Storage{
@@ -31,7 +26,7 @@ print(err);
 
 class ProductImagePicker extends StatefulWidget {
  final void Function(File pickedImage) getImageValue;
-  ProductImagePicker(this.getImageValue);
+  const ProductImagePicker(this.getImageValue, {super.key});
 
 
 
@@ -47,14 +42,14 @@ var pickedImage;
 
   
  pickImage(ImageSource imageType) async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
 
     try {
-      final photo = await _picker.pickImage(source: imageType);
+      final photo = await picker.pickImage(source: imageType);
       if (photo == null) return;
       final tempImage = File(photo.path);
       setState(() {
-        this.pickedImage = tempImage;
+        pickedImage = tempImage;
         print(pickedImage);
         widget.getImageValue(pickedImage);
       });
@@ -73,7 +68,7 @@ var pickedImage;
 Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Container(
+        SizedBox(
           width: 100,
           height: 100,
           child: pickedImage != null
@@ -89,7 +84,7 @@ Row(
 
         ),
         ElevatedButton.icon(
-           style: ButtonStyle(
+           style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.white),
                         foregroundColor: MaterialStatePropertyAll<Color>(Colors.green)
@@ -98,8 +93,8 @@ Row(
             pickImage(ImageSource.gallery);
             // imagePickerOption();
             },
-          icon: Icon(Icons.image),
-          label: Text('Add Image'),
+          icon: const Icon(Icons.image),
+          label: const Text('Add Image'),
         ),
       ],
     );

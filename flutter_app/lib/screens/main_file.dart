@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'test.dart';
 
 
 class Test2 extends StatefulWidget {
@@ -19,13 +16,13 @@ class _Test2State extends State<Test2> {
       body: Container(
         child: Column(
           children: [
-            TextField(
+            const TextField(
               // decoration: InputDecoration(border: Border.all()),
             ),
 
             ElevatedButton(onPressed: () {
               
-            }, child: Text("Press"),
+            }, child: const Text("Press"),
             )
           ],
         ),
